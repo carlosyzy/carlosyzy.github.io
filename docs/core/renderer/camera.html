@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>Camera 相机组件</h1>
+
+<p>Camera（相机组件）是场景中用于渲染视图的组件。每个相机对应一个离屏渲染目标（RenderTexture），将可见物体渲染到贴图上，然后再将贴图渲染到屏幕上。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/renderer/camera.h"</code></pre>
+
+<h2>关键属性</h2>
+<table>
+    <thead><tr><th>属性</th><th>默认值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>_priority</td><td>0</td><td>渲染优先级</td></tr>
+        <tr><td>_groupIds</td><td>1</td><td>可见性组 ID</td></tr>
+        <tr><td>_projection</td><td>Perspective</td><td>投影类型</td></tr>
+        <tr><td>_fov</td><td>45.0f</td><td>视场角度（度）</td></tr>
+        <tr><td>_nearClip</td><td>0.1f</td><td>近裁剪平面</td></tr>
+        <tr><td>_farClip</td><td>100.0f</td><td>远裁剪平面</td></tr>
+        <tr><td>_orthoHeight</td><td>1.0f</td><td>正交投影高度</td></tr>
+        <tr><td>_isOnScreen</td><td>false</td><td>是否在屏幕上显示</td></tr>
+    </tbody>
+</table>
+
+<h2>核心概念</h2>
+<h3>投影类型（ECameraProjection）</h3>
+<table>
+    <thead><tr><th>值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>Ortho</td><td>正交投影</td></tr>
+        <tr><td>Perspective</td><td>透视投影</td></tr>
+    </tbody>
+</table>
+
+<h2>API 接口</h2>
+
+<h3>屏幕设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setIsOnScreen(isOnScreen)</td><td>设置是否在屏幕上显示</td><td>isOnScreen: true/false</td><td>void</td></tr>
+        <tr><td>getIsOnScreen()</td><td>获取是否在屏幕上显示</td><td>-</td><td>bool</td></tr>
+    </tbody>
+</table>
+
+<h3>优先级设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setPriority(priority)</td><td>设置渲染优先级</td><td>priority: 优先级</td><td>void</td></tr>
+        <tr><td>getPriority()</td><td>获取渲染优先级</td><td>-</td><td>int</td></tr>
+    </tbody>
+</table>
+
+<h3>可见性组</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setGroupIDs(groupIDs)</td><td>设置可见性组 ID</td><td>groupIDs: 组 ID 位掩码</td><td>void</td></tr>
+        <tr><td>addGroupID(groupID)</td><td>添加可见性组 ID</td><td>groupID: 组 ID</td><td>void</td></tr>
+        <tr><td>getGroupIDs()</td><td>获取可见性组 ID</td><td>-</td><td>int</td></tr>
+    </tbody>
+</table>
+
+<h3>投影设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setProjection(projection)</td><td>设置投影类型</td><td>projection: ECameraProjection 枚举</td><td>void</td></tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+    <div class="content-card">
+        <h1>Boo Engine</h1>
+        <p class="subtitle">一个简单、灵活、高效的 Vulkan 游戏引擎</p>
+
+        <div class="tech-tags">
+            <span class="tech-tag">Vulkan</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">跨平台</span>
+            <span class="tech-tag">现代架构</span>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>高性能渲染</h3>
+                <p>基于 Vulkan，提供实例化绘制、批量渲染、Bindless 纹理等高级特性</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>跨平台支持</h3>
+                <p>Windows、macOS、Android 多平台运行，一套代码多处运行</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3>ECS 架构</h3>
+                <p>灵活的组件系统，组合优于继承，轻松扩展游戏功能</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>2D/3D 合一</h3>
+                <p>统一的场景系统，同时支持 2D UI 和 3D 场景渲染</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>响应式 UI</h3>
+                <p>自动布局系统，适配不同屏幕尺寸，事件系统完善</p>
+            </div>
+        </div>
+
+        <div class="home-section">
+            <h2>核心模块</h2>
+            <div class="module-grid">
+                <div class="module-card" onclick="parent.app.navigate('core/scene')">
+                    <h3>场景系统</h3>
+                    <p>了解 Scene、Node2D、Node3D 等核心概念</p>
+                </div>
+                <div class="module-card" onclick="parent.app.navigate('core/component')">
+                    <h3>组件系统</h3>
+                    <p>Component 基类及各种组件的使用方法</p>
+                </div>
+                <div class="module-card" onclick="parent.app.navigate('core/asset/asset-manager')">
+                    <h3>资源系统</h3>
+                    <p>资源加载、资产管理器及各类资源介绍</p>
+                </div>
+                <div class="module-card" onclick="parent.app.navigate('core/alpha')">
+                    <h3>启动场景</h3>
+                    <p>引擎启动画面 Alpha 场景配置</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

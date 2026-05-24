@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>AudioManager 音频管理器</h1>
+
+<h2>概述</h2>
+<p>AudioManager（音频管理器）是引擎中统一管理音频播放的模块，负责音频的加载、播放和控制。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/audio/audio-manager.h"</code></pre>
+
+<h2>API 接口</h2>
+
+<h3>初始化</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>init()</td><td>初始化音频系统</td><td>-</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>音乐播放</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>playMusic(audioPath, loop)</td><td>通过路径播放音乐</td><td>audioPath: 音频路径，loop: 是否循环</td><td>Audio*</td></tr>
+        <tr><td>playMusic(audioAsset, loop)</td><td>通过音频资产播放音乐</td><td>audioAsset: AudioAsset 指针，loop: 是否循环</td><td>Audio*</td></tr>
+    </tbody>
+</table>
+
+<h3>音效播放</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>playSound(audioPath)</td><td>通过路径播放音效</td><td>audioPath: 音频路径</td><td>void</td></tr>
+        <tr><td>playSound(audioAsset)</td><td>通过音频资产播放音效</td><td>audioAsset: AudioAsset 指针</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>更新与销毁</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>update(dt)</td><td>每帧更新</td><td>dt: 时间增量</td><td>void</td></tr>
+        <tr><td>destroy()</td><td>销毁音频管理器</td><td>-</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h2>使用示例</h2>
+
+<pre><code>// ── 播放背景音乐 ─────────────────────────────────────
+auto *bgMusic = Boo::audioManager->playMusic("audio/bgm.mp3", true);
+if (bgMusic)
+{
+    bgMusic->setVolume(0.5f);
+}
+
+// ── 播放音效 ────────────────────────────────────────
+Boo::audioManager->playSound("audio/click.wav");</code></pre>
+</div>
+</body>
+</html>

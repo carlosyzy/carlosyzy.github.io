@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>AudioAsset 音频资产</h1>
+
+<h2>概述</h2>
+<p>AudioAsset（音频资产）用于存储音频数据，支持加载和播放音频文件。</p>
+
+<h3>资源类型</h3>
+<p><code>EAssetType::Audio</code></p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/asset/audio-asset.h"</code></pre>
+
+<h2>API 接口</h2>
+
+<h3>构造函数</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td><code class="inline">AudioAsset()</code></td><td>创建空音频资产</td></tr>
+        <tr><td><code class="inline">AudioAsset(uuid)</code></td><td>通过 UUID 创建音频资产</td></tr>
+        <tr><td><code class="inline">AudioAsset(uuid, path, name)</code></td><td>通过完整参数创建音频资产</td></tr>
+    </tbody>
+</table>
+
+<h3>音频创建</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>create(audioBuffer)</td><td>通过音频数据创建音频资产</td><td>audioBuffer: 音频数据缓冲区</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>音频查询</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>getTotalSeconds()</td><td>获取音频总时长（秒）</td><td>const float&</td></tr>
+        <tr><td>getAudioBuffer()</td><td>获取音频数据缓冲区</td><td>std::vector&lt;uint8_t&gt;&</td></tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>GLTFAsset GLTF 资产</h1>
+
+<h2>概述</h2>
+<p>GLTFAsset（GLTF 资产）用于加载和解析 GLTF 格式的 3D 模型文件，将 GLTF 数据转换为引擎可用的 MeshAsset。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/asset/gltf-asset.h"</code></pre>
+
+<h2>API 接口</h2>
+
+<h3>构造函数</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td><code class="inline">GLTFAsset()</code></td><td>创建空 GLTF 资产</td></tr>
+        <tr><td><code class="inline">GLTFAsset(uuid)</code></td><td>通过 UUID 创建 GLTF 资产</td></tr>
+        <tr><td><code class="inline">GLTFAsset(uuid, path, name)</code></td><td>通过完整参数创建 GLTF 资产</td></tr>
+    </tbody>
+</table>
+
+<h3>GLTF 解析</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>create(m_asset)</td><td>解析 GLTF 数据</td><td>m_asset: fastgltf Asset 指针</td><td>void</td></tr>
+        <tr><td>getRoot()</td><td>获取 GLTF 根节点</td><td>-</td><td>const GLTFNode&</td></tr>
+        <tr><td>getMeshs()</td><td>获取所有网格资产</td><td>-</td><td>map&lt;string, MeshAsset*&gt;&</td></tr>
+        <tr><td>getMesh(meshName)</td><td>获取指定名称的网格资产</td><td>meshName: 网格名称</td><td>MeshAsset*</td></tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

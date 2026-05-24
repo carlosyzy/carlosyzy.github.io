@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../../css/main.css">
+</head>
+
+<body>
+    <div class="content-card">
+        <h1>MeshRenderer 网格渲染组件</h1>
+
+        <h2>概述</h2>
+        <p>MeshRenderer（网格渲染组件）用于在 3D 场景中渲染网格模型。通过 MeshRenderer 组件，可以将 MeshAsset 网格资源和 MaterialAsset 材质资源绑定到节点上，实现模型的显示。
+        </p>
+
+        <h3>组件层级</h3>
+        <p>Layer3D 组件，只能添加到 Node3D 节点。</p>
+
+        <h2>头文件</h2>
+        <pre><code>#include "core/renderer/3d/mesh-renderer.h"</code></pre>
+
+        <h2>API 接口</h2>
+
+        <h3>网格设置</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>接口</th>
+                    <th>说明</th>
+                    <th>参数</th>
+                    <th>返回值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setMesh(meshUuid)</td>
+                    <td>通过 UUID 设置网格资产</td>
+                    <td>meshUuid: 网格 UUID</td>
+                    <td>void</td>
+                </tr>
+                <tr>
+                    <td>setMesh(meshAsset)</td>
+                    <td>直接设置网格资产</td>
+                    <td>meshAsset: MeshAsset 指针</td>
+                    <td>void</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>材质设置</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>接口</th>
+                    <th>说明</th>
+                    <th>参数</th>
+                    <th>返回值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setMaterial(materialName)</td>
+                    <td>通过名称设置材质</td>
+                    <td>materialName: 材质名称</td>
+                    <td>void</td>
+                </tr>
+                <tr>
+                    <td>setMaterial(materialAsset)</td>
+                    <td>直接设置材质资产</td>
+                    <td>materialAsset: MaterialAsset 指针</td>
+                    <td>void</td>
+                </tr>
+                <tr>
+                    <td>setMaterial(index, materialName)</td>
+                    <td>通过索引设置子材质</td>
+                    <td>index: 索引，materialName: 材质名称</td>
+                    <td>void</td>
+                </tr>
+                <tr>
+                    <td>getMaterial()</td>
+                    <td>获取主材质</td>
+                    <td>-</td>
+                    <td>MaterialAsset*</td>
+                </tr>
+                <tr>
+                    <td>getMaterials()</td>
+                    <td>获取所有材质</td>
+                    <td>-</td>
+                    <td>vector&lt;MaterialAsset*&gt;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>纹理设置</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>接口</th>
+                    <th>说明</th>
+                    <th>参数</th>
+                    <th>返回值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setTexture(path)</td>
+                    <td>通过路径设置纹理</td>
+                    <td>path: 纹理路径</td>
+                    <td>void</td>
+                </tr>
+                <tr>
+                    <td>setTexture(texture)</td>
+                    <td>直接设置纹理</td>
+                    <td>texture: TextureAsset 指针</td>
+                    <td>void</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>使用示例</h2>
+
+        <pre><code>// ── 创建 3D 节点 ─────────────────────────────────────
+Boo::Node3D *root3D = m_scene->getRoot3D();
+auto *cylinderNode = new Boo::Node3D("Cylinder");
+cylinderNode->setPosition(0.0f, 0.0f, 0.0f);
+root3D->addChild(cylinderNode);
+
+// ── 添加 MeshRenderer 组件 ──────────────────────────
+auto *meshRenderer = dynamic_cast&lt;Boo::MeshRenderer *&gt;(cylinderNode->addComponent("MeshRenderer"));
+if (meshRenderer)
+{
+    meshRenderer->setMesh("builtin/mesh/cylinder");
+    meshRenderer->setMaterial("builtin/material/default");
+}</code></pre>
+    </div>
+</body>
+
+</html>
