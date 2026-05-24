@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>Camera 相机组件</h1>
+
+<h2>概述</h2>
+<p>Camera（相机组件）是场景中用于渲染视图的组件。每个相机对应一个离屏渲染目标（RenderTexture），将可见物体渲染到贴图上，然后再将贴图渲染到屏幕上。</p>
+
+<h3>组件层级</h3>
+<p>Default 组件，可以添加到 Node2D 或 Node3D 节点。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/renderer/camera.h"</code></pre>
+
+<h2>核心概念</h2>
+<h3>投影类型（ECameraProjection）</h3>
+<table>
+    <thead><tr><th>值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>Ortho</td><td>正交投影</td></tr>
+        <tr><td>Perspective</td><td>透视投影</td></tr>
+    </tbody>
+</table>
+
+<h3>视图矩阵</h3>
+<p>将 3D 世界空间变换为 3D 相机空间，负责将世界坐标变换到摄像机/观察空间。</p>
+
+<h3>投影矩阵</h3>
+<p>将 3D 观察空间变换为 2D 裁剪空间（NDC 空间：-1 到 1），根据摄像机的视场角度、近裁剪平面、远裁剪平面进行变换。</p>
+
+<h2>API 接口</h2>
+
+<h3>屏幕设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setIsOnScreen(isOnScreen)</td><td>设置是否在屏幕上显示</td><td>isOnScreen: true/false</td><td>void</td></tr>
+        <tr><td>getIsOnScreen()</td><td>获取是否在屏幕上显示</td><td>-</td><td>bool</td></tr>
+    </tbody>
+</table>
+
+<h3>优先级设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setPriority(priority)</td><td>设置渲染优先级</td><td>priority: 优先级（越小越先渲染）</td><td>void</td></tr>
+        <tr><td>getPriority()</td><td>获取渲染优先级</td><td>-</td><td>int</td></tr>
+    </tbody>
+</table>
+
+<h3>可见性组</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setGroupIDs(groupIDs)</td><td>设置可见性组 ID</td><td>groupIDs: 组 ID 位掩码</td><td>void</td></tr>
+        <tr><td>addGroupID(groupID)</td><td>添加可见性组 ID</td><td>groupID: 组 ID（整数值）</td><td>void</td></tr>
+        <tr><td>getGroupIDs()</td><td>获取可见性组 ID</td><td>-</td><td>int</td></tr>
+    </tbody>
+</table>
+
+<h3>投影设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setProjection(projection)</td><td>设置投影类型</td><td>projection: ECameraProjection 枚举</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>视图更新</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>updateViewSize()</td><td>更新视图大小</td><td>-</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h2>使用示例</h2>
+
+<h3>创建 2D 相机</h3>
+<pre><code>auto *scene = Boo::game->getScene();
+auto *root2D = scene->getRoot2D();
+
+auto *cameraNode = new Boo::Node2D("Camera2D");
+cameraNode->setPosition(0.0f, 0.0f, 0.0f);
+root2D->addChild(cameraNode);
+
+auto *camera = dynamic_cast&lt;Boo::Camera *&gt;(cameraNode->addComponent("Camera"));
+if (camera)
+{
+    camera->addGroupID(Boo::ENodeGroup::Node2D);
+    camera->setProjection(Boo::ECameraProjection::Ortho);
+    camera->setPriority(100);
+}</code></pre>
+
+<h3>创建 3D 相机</h3>
+<pre><code>Boo::Node3D *root3D = m_scene->getRoot3D();
+if (!root3D)
+    return;
+
+// 创建 3D 相机节点
+m_cameraNode = new Boo::Node3D("Camera3D");
+root3D->addChild(m_cameraNode);
+m_cameraNode->setPosition(0, 30.0f, 30.0f);
+m_cameraNode->setEulerAngles(-45, 0, 0);
+m_cameraNode->setScale(1, 1, 1);
+
+Boo::Camera *m_camera = dynamic_cast&lt;Boo::Camera *&gt;(m_cameraNode->addComponent("Camera"));
+if (m_camera)
+{
+    m_camera->addGroupID(Boo::ENodeGroup::Node3D);
+    m_camera->setProjection(Boo::ECameraProjection::Perspective);
+    m_camera->setPriority(0);
+}</code></pre>
+</div>
+</body>
+</html>

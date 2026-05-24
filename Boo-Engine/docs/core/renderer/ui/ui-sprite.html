@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>UISprite UI 精灵组件</h1>
+
+<h2>概述</h2>
+<p>UISprite（UI 精灵组件）用于在 2D 界面上显示图片。通过 UISprite 组件，可以将纹理绑定到节点上，实现图片的显示。</p>
+
+<h3>组件层级</h3>
+<p>Layer2D 组件，只能添加到 Node2D 节点。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/renderer/ui/ui-sprite.h"</code></pre>
+
+<h2>尺寸模式（ESizeMode）</h2>
+<table>
+    <thead><tr><th>值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>Raw</td><td>图片原始尺寸</td></tr>
+        <tr><td>Custom</td><td>自定义尺寸</td></tr>
+    </tbody>
+</table>
+<p>尺寸模式用于控制 UISprite 的显示尺寸：</p>
+<ul>
+    <li><strong>Raw</strong>：自动使用纹理的原始尺寸</li>
+    <li><strong>Custom</strong>：使用 Node2D 节点设置的尺寸</li>
+</ul>
+
+<h2>API 接口</h2>
+
+<h3>纹理设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setTexture(texture)</td><td>通过路径设置纹理</td><td>texture: 纹理路径</td><td>void</td></tr>
+        <tr><td>setTexture(textureAsset)</td><td>直接设置纹理资产</td><td>textureAsset: TextureAsset 指针</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>材质设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setMaterial(material)</td><td>通过名称设置材质</td><td>material: 材质名称</td><td>void</td></tr>
+        <tr><td>setMaterial(materialAsset)</td><td>直接设置材质资产</td><td>materialAsset: MaterialAsset 指针</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>颜色设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setColor(color)</td><td>设置颜色</td><td>color: Color 引用</td><td>void</td></tr>
+        <tr><td>setColor(color)</td><td>通过字符串设置颜色</td><td>color: 颜色字符串（如 "#FF0000"）</td><td>void</td></tr>
+        <tr><td>setColor(r, g, b, a)</td><td>通过 RGBA 设置颜色</td><td>r, g, b, a: 颜色分量（0-1）</td><td>void</td></tr>
+        <tr><td>setAlpha(alpha)</td><td>设置透明度</td><td>alpha: 透明度（0-1）</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>尺寸模式</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setSizeMode(sizeMode)</td><td>设置尺寸模式</td><td>sizeMode: ESizeMode 枚举</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h2>使用示例</h2>
+
+<pre><code>auto *bgNode = new Boo::Node2D("bg");
+bgNode->setSize(720.0f, 1280.0f);
+_node2d->addChild(bgNode);
+auto *bgSprite = dynamic_cast&lt;Boo::UISprite *&gt;(bgNode->addComponent("UISprite"));
+if (bgSprite)
+{
+    bgSprite->setTexture("bricked/textures/bg.png");
+}</code></pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,1886 @@
+/**
+ * Boo Engine Documentation - Main Application
+ */
+
+// 文档导航数据
+const DOCS_DATA = [
+    {
+        title: '入门指南',
+        items: [
+            { name: '首页', id: 'home' }
+        ]
+    },
+    {
+        title: '场景系统',
+        items: [
+            { name: 'Scene 场景', id: 'scene' },
+            { name: 'Node2D 2D节点', id: 'node2d' },
+            { name: 'Node3D 3D节点', id: 'node3d' },
+            { name: 'NodeUtil 节点工具', id: 'nodeutil' }
+        ]
+    },
+    {
+        title: '组件系统',
+        alwaysExpanded: true,
+        children: [
+            { name: 'Component 组件基类', id: 'component' },
+            { name: 'Camera 相机组件', id: 'camera' },
+            {
+                title: '渲染组件',
+                children: [
+                    {
+                        title: 'UI',
+                        expandId: 'ui_render',
+                        children: [
+                            { name: 'UISprite UI精灵', id: 'uisprite' },
+                            { name: 'UIText UI文本', id: 'uitext' },
+                            { name: 'UIMask UI遮罩', id: 'uimask' }
+                        ]
+                    },
+                    {
+                        title: '3D',
+                        expandId: '3d_render',
+                        children: [
+                            { name: 'MeshRenderer 网格渲染', id: 'meshrenderer' }
+                        ]
+                    }
+                ]
+            },
+            {
+                title: '其他组件',
+                children: [
+                    {
+                        title: '3D',
+                        expandId: '3d_other',
+                        children: [
+                            { name: 'GLTFComponent GLTF组件', id: 'gltfcomponent' }
+                        ]
+                    },
+                    {
+                        title: 'Tool',
+                        expandId: 'tool_other',
+                        children: [
+                            { name: 'EditorCamera 编辑器相机', id: 'editorcamera' },
+                            { name: 'GroundGrid 地面网格', id: 'groundgrid' }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        title: '资源系统',
+        items: [
+            { name: 'AssetManager 资产管理器', id: 'assetmanager' },
+            { name: 'MeshAsset 网格资产', id: 'meshasset' },
+            { name: 'MaterialAsset 材质资产', id: 'materialasset' },
+            { name: 'ShaderAsset 着色器资产', id: 'shaderasset' },
+            { name: 'TextureAsset 纹理资产', id: 'textureasset' },
+            { name: 'GLTFAsset GLTF资产', id: 'gltfasset' }
+        ]
+    },
+    {
+        title: '启动场景',
+        items: [
+            { name: 'Alpha 启动场景', id: 'alpha' }
+        ]
+    },
+    {
+        title: '多平台适配',
+        items: [
+            { name: 'Windows 适配', id: 'windows' },
+            { name: 'macOS 适配', id: 'macos' }
+        ]
+    }
+];
+
+// 文档内容数据
+const DOCS_CONTENT = {
+    home: {
+        title: 'Boo Engine 文档',
+        content: `
+            <div class="home-hero">
+                <h1>Boo Engine</h1>
+                <p class="subtitle">一个简单、灵活、高效的 Vulkan 游戏引擎</p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">Vulkan</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">跨平台</span>
+                    <span class="tech-tag">现代架构</span>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>高性能渲染</h3>
+                        <p>基于 Vulkan，提供实例化绘制、批量渲染、Bindless 纹理等高级特性</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>跨平台支持</h3>
+                        <p>Windows、macOS、Linux 等多平台运行，一套代码多处运行</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧩</div>
+                        <h3>ECS 架构</h3>
+                        <p>灵活的组件系统，组合优于继承，轻松扩展游戏功能</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>2D/3D 合一</h3>
+                        <p>统一的场景系统，同时支持 2D UI 和 3D 场景渲染</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>响应式 UI</h3>
+                        <p>自动布局系统，适配不同屏幕尺寸，事件系统完善</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>异步加载</h3>
+                        <p>资产异步加载，不阻塞主线程，流畅体验</p>
+                    </div>
+                </div>
+
+                <div class="home-section">
+                    <h2>技术栈</h2>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <span class="tech-label">渲染 API</span>
+                            <span class="tech-value">Vulkan</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-label">编程语言</span>
+                            <span class="tech-value">C++</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-label">字体渲染</span>
+                            <span class="tech-value">FreeType</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-label">构建系统</span>
+                            <span class="tech-value">CMake</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-section">
+                    <h2>核心模块</h2>
+                    <div class="module-grid">
+                        <div class="module-card" onclick="app.navigate('scene')">
+                            <h3>场景系统</h3>
+                            <p>了解 Scene、Node2D、Node3D 等核心概念</p>
+                        </div>
+                        <div class="module-card" onclick="app.navigate('component')">
+                            <h3>组件系统</h3>
+                            <p>Component 基类及各种组件的使用方法</p>
+                        </div>
+                        <div class="module-card" onclick="app.navigate('assetmanager')">
+                            <h3>资源系统</h3>
+                            <p>资源加载、资产管理器及各类资源介绍</p>
+                        </div>
+                        <div class="module-card" onclick="app.navigate('alpha')">
+                            <h3>启动场景</h3>
+                            <p>引擎启动画面 Alpha 场景配置</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    scene: {
+        title: 'Scene 场景系统',
+        content: `
+            <h1>Scene 场景系统设计文档</h1>
+            
+            <h2>概述</h2>
+            <p>Scene（场景）是 Boo 引擎中最核心的概念之一，它是所有内容的容器。一个 Scene 包含场景中的所有节点，包括 2D 节点和 3D 节点。</p>
+            
+            <h2>核心职责</h2>
+            <ul>
+                <li><strong>层级管理</strong>：维护 2D 和 3D 两套节点树结构</li>
+                <li><strong>生命周期</strong>：管理场景的启动、更新和销毁</li>
+                <li><strong>变换传播</strong>：通过世界矩阵变换确保子节点正确继承父节点的变换</li>
+                <li><strong>组件管理</strong>：支持在节点上添加各种组件</li>
+            </ul>
+
+            <h2>系统架构</h2>
+            <h3>节点类型</h3>
+            <p>引擎提供两种类型的节点供使用：</p>
+            <ul>
+                <li><strong>Node2D</strong>：用于 2D UI 渲染</li>
+                <li><strong>Node3D</strong>：用于 3D 场景渲染</li>
+            </ul>
+
+            <h2>核心概念</h2>
+            <h3>节点层级（ENodeLayer）</h3>
+            <p>节点层级用于区分不同类型的节点：</p>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Default</td><td>默认层级</td></tr>
+                    <tr><td>Node2D</td><td>2D 节点层</td></tr>
+                    <tr><td>Node3D</td><td>3D 节点层</td></tr>
+                    <tr><td>Scene</td><td>场景层</td></tr>
+                </tbody>
+            </table>
+
+            <h3>组件层级（EComponentLayer）</h3>
+            <p>组件层级与节点层级对应，确保组件只能添加到对应类型的节点上：</p>
+            <ul>
+                <li>Node2D 只能添加 Layer2D 组件</li>
+                <li>Node3D 只能添加 Layer3D 组件</li>
+            </ul>
+
+            <h3>节点组（ENodeGroup）</h3>
+            <p>节点组用于相机的可见性判断。</p>
+
+            <h2>API 接口</h2>
+            <h3>构造函数</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code class="inline">Scene(name, uuid = "")</code></td><td>创建场景</td></tr>
+                </tbody>
+            </table>
+
+            <h3>场景管理</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getRoot2D()</td><td>获取 2D 根节点</td><td>-</td><td>Node2D*</td></tr>
+                    <tr><td>getRoot3D()</td><td>获取 3D 根节点</td><td>-</td><td>Node3D*</td></tr>
+                    <tr><td>launch()</td><td>启动场景</td><td>-</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    node2d: {
+        title: 'Node2D 2D 节点',
+        content: `
+            <h1>Node2D - 2D 节点</h1>
+            
+            <p>Node2D 用于 2D UI 渲染，支持位置、缩放、旋转、锚点等变换操作。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/scene/node-2d.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>构造函数</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code class="inline">Node2D(name, uuid = "")</code></td><td>创建 2D 节点</td></tr>
+                </tbody>
+            </table>
+
+            <h3>变换控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setPosition(x, y, z)</td><td>设置本地位置</td><td>x, y, z: 坐标值</td><td>void</td></tr>
+                    <tr><td>setWorldPosition(x, y, z)</td><td>设置世界位置</td><td>x, y, z: 坐标值</td><td>void</td></tr>
+                    <tr><td>getPosition()</td><td>获取本地位置</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>getWorldPosition()</td><td>获取世界位置</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>setScale(x, y, z)</td><td>设置缩放</td><td>x, y, z: 缩放比例</td><td>void</td></tr>
+                    <tr><td>setWorldScale(x, y, z)</td><td>设置世界缩放</td><td>x, y, z: 缩放比例</td><td>void</td></tr>
+                    <tr><td>getScale()</td><td>获取缩放</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>getWorldScale()</td><td>获取世界缩放</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>setEulerAngles(x, y, z)</td><td>设置欧拉角（度）</td><td>x, y, z: 旋转角度</td><td>void</td></tr>
+                    <tr><td>setRotation(x, y, z, w)</td><td>设置四元数旋转</td><td>x, y, z, w: 四元数分量</td><td>void</td></tr>
+                    <tr><td>setWorldRotation(x, y, z, w)</td><td>设置世界四元数旋转</td><td>x, y, z, w: 四元数分量</td><td>void</td></tr>
+                    <tr><td>getRotation()</td><td>获取旋转四元数</td><td>-</td><td>Quat&</td></tr>
+                    <tr><td>getWorldRotation()</td><td>获取世界旋转四元数</td><td>-</td><td>Quat&</td></tr>
+                    <tr><td>getEulerAngles()</td><td>获取欧拉角</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>setAngle(angle)</td><td>设置 Z 轴旋转角度（度）</td><td>angle: 旋转角度</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>2D 特有属性</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setAnchor(x, y)</td><td>设置锚点</td><td>x, y: 锚点坐标 (0-1)</td><td>void</td></tr>
+                    <tr><td>getAnchor()</td><td>获取锚点</td><td>-</td><td>Vec2&</td></tr>
+                    <tr><td>setSize(width, height)</td><td>设置尺寸</td><td>width, height: 宽高像素值</td><td>void</td></tr>
+                    <tr><td>getSize()</td><td>获取尺寸</td><td>-</td><td>Size&</td></tr>
+                    <tr><td>getUIWorldMatrix()</td><td>获取 UI 世界矩阵</td><td>-</td><td>Mat4&</td></tr>
+                </tbody>
+            </table>
+
+            <h3>层级管理</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>addChild(node)</td><td>添加子节点</td><td>node: Node2D/Node3D 指针</td><td>void</td></tr>
+                    <tr><td>removeChild(node)</td><td>移除子节点</td><td>node: Node 指针</td><td>void</td></tr>
+                    <tr><td>removeFromParent()</td><td>从父节点移除</td><td>-</td><td>void</td></tr>
+                    <tr><td>getChildren()</td><td>获取子节点列表</td><td>-</td><td>vector&lt;Node*&gt;&</td></tr>
+                    <tr><td>getChildByName(name)</td><td>按名称查找子节点</td><td>name: 节点名称</td><td>Node*</td></tr>
+                    <tr><td>setParent(parent)</td><td>设置父节点</td><td>parent: Node 指针</td><td>void</td></tr>
+                    <tr><td>getParent()</td><td>获取父节点</td><td>-</td><td>Node*</td></tr>
+                </tbody>
+            </table>
+
+            <h3>组件管理</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>addComponent(name, uuid)</td><td>添加组件</td><td>name: 组件名称，uuid: 可选</td><td>Component*</td></tr>
+                    <tr><td>getComponent(name)</td><td>获取组件</td><td>name: 组件名称</td><td>Component*</td></tr>
+                    <tr><td>getComponents()</td><td>获取所有组件</td><td>-</td><td>vector&lt;Component*&gt;</td></tr>
+                    <tr><td>getUIRenderer()</td><td>获取 UI 渲染组件</td><td>-</td><td>UIRenderer*</td></tr>
+                </tbody>
+            </table>
+
+            <h3>激活状态</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setActive(active)</td><td>设置激活状态</td><td>void</td></tr>
+                    <tr><td>getActive()</td><td>获取自身激活状态</td><td>bool</td></tr>
+                    <tr><td>getActiveInHierarchy()</td><td>获取层级激活状态</td><td>bool</td></tr>
+                </tbody>
+            </table>
+
+            <h3>节点信息</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getName()</td><td>获取节点名称</td><td>string</td></tr>
+                    <tr><td>setName(name)</td><td>设置节点名称</td><td>void</td></tr>
+                    <tr><td>getUuid()</td><td>获取节点 UUID</td><td>string</td></tr>
+                    <tr><td>setUuid(uuid)</td><td>设置节点 UUID</td><td>void</td></tr>
+                    <tr><td>getLayer()</td><td>获取节点层级</td><td>ENodeLayer</td></tr>
+                    <tr><td>setGroupId(groupId)</td><td>设置节点组 ID</td><td>void</td></tr>
+                    <tr><td>getGroupId()</td><td>获取节点组 ID</td><td>int</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    node3d: {
+        title: 'Node3D 3D 节点',
+        content: `
+            <h1>Node3D - 3D 节点</h1>
+            
+            <p>Node3D 用于 3D 场景渲染，支持位置、缩放、旋转等变换操作。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/scene/node-3d.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>构造函数</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code class="inline">Node3D(name, uuid = "")</code></td><td>创建 3D 节点</td></tr>
+                </tbody>
+            </table>
+
+            <h3>变换控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setPosition(x, y, z)</td><td>设置本地位置</td><td>x, y, z: 坐标值</td><td>void</td></tr>
+                    <tr><td>setWorldPosition(x, y, z)</td><td>设置世界位置</td><td>x, y, z: 坐标值</td><td>void</td></tr>
+                    <tr><td>getPosition()</td><td>获取本地位置</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>getWorldPosition()</td><td>获取世界位置</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>setScale(x, y, z)</td><td>设置缩放</td><td>x, y, z: 缩放比例</td><td>void</td></tr>
+                    <tr><td>setWorldScale(x, y, z)</td><td>设置世界缩放</td><td>x, y, z: 缩放比例</td><td>void</td></tr>
+                    <tr><td>getScale()</td><td>获取缩放</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>getWorldScale()</td><td>获取世界缩放</td><td>-</td><td>Vec3&</td></tr>
+                    <tr><td>setEulerAngles(x, y, z)</td><td>设置欧拉角（度）</td><td>x, y, z: 旋转角度</td><td>void</td></tr>
+                    <tr><td>setRotation(x, y, z, w)</td><td>设置四元数旋转</td><td>x, y, z, w: 四元数分量</td><td>void</td></tr>
+                    <tr><td>setWorldRotation(x, y, z, w)</td><td>设置世界四元数旋转</td><td>x, y, z, w: 四元数分量</td><td>void</td></tr>
+                    <tr><td>getRotation()</td><td>获取旋转四元数</td><td>-</td><td>Quat&</td></tr>
+                    <tr><td>getWorldRotation()</td><td>获取世界旋转四元数</td><td>-</td><td>Quat&</td></tr>
+                    <tr><td>getEulerAngles()</td><td>获取欧拉角</td><td>-</td><td>Vec3&</td></tr>
+                </tbody>
+            </table>
+
+            <h3>3D 特有属性</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getWorldMatrixIT()</td><td>获取逆转置矩阵</td><td>Mat4&</td></tr>
+                </tbody>
+            </table>
+
+            <h3>生命周期</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>update(deltaTime)</td><td>每帧更新</td><td>deltaTime: 时间增量</td><td>void</td></tr>
+                    <tr><td>lateUpdate(deltaTime)</td><td>延迟更新</td><td>deltaTime: 时间增量</td><td>void</td></tr>
+                    <tr><td>destroy()</td><td>销毁节点</td><td>-</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>层级管理</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>addChild(node)</td><td>添加子节点</td><td>node: Node2D/Node3D 指针</td><td>void</td></tr>
+                    <tr><td>removeChild(node)</td><td>移除子节点</td><td>node: Node 指针</td><td>void</td></tr>
+                    <tr><td>removeFromParent()</td><td>从父节点移除</td><td>-</td><td>void</td></tr>
+                    <tr><td>getChildren()</td><td>获取子节点列表</td><td>-</td><td>vector&lt;Node*&gt;&</td></tr>
+                    <tr><td>getChildByName(name)</td><td>按名称查找子节点</td><td>name: 节点名称</td><td>Node*</td></tr>
+                    <tr><td>setParent(parent)</td><td>设置父节点</td><td>parent: Node 指针</td><td>void</td></tr>
+                    <tr><td>getParent()</td><td>获取父节点</td><td>-</td><td>Node*</td></tr>
+                </tbody>
+            </table>
+
+            <h3>组件管理</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>addComponent(name, uuid)</td><td>添加组件</td><td>name: 组件名称，uuid: 可选</td><td>Component*</td></tr>
+                    <tr><td>getComponent(name)</td><td>获取组件</td><td>name: 组件名称</td><td>Component*</td></tr>
+                    <tr><td>getComponents()</td><td>获取所有组件</td><td>-</td><td>vector&lt;Component*&gt;</td></tr>
+                    <tr><td>getMeshRenderer()</td><td>获取网格渲染组件</td><td>-</td><td>MeshRenderer*</td></tr>
+                </tbody>
+            </table>
+
+            <h3>激活状态</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setActive(active)</td><td>设置激活状态</td><td>void</td></tr>
+                    <tr><td>getActive()</td><td>获取自身激活状态</td><td>bool</td></tr>
+                    <tr><td>getActiveInHierarchy()</td><td>获取层级激活状态</td><td>bool</td></tr>
+                </tbody>
+            </table>
+
+            <h3>节点信息</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getName()</td><td>获取节点名称</td><td>string</td></tr>
+                    <tr><td>setName(name)</td><td>设置节点名称</td><td>void</td></tr>
+                    <tr><td>getUuid()</td><td>获取节点 UUID</td><td>string</td></tr>
+                    <tr><td>setUuid(uuid)</td><td>设置节点 UUID</td><td>void</td></tr>
+                    <tr><td>getLayer()</td><td>获取节点层级</td><td>ENodeLayer</td></tr>
+                    <tr><td>setGroupId(groupId)</td><td>设置节点组 ID</td><td>void</td></tr>
+                    <tr><td>getGroupId()</td><td>获取节点组 ID</td><td>int</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    nodeutil: {
+        title: 'NodeUtil 节点工具类',
+        content: `
+            <h1>NodeUtil - 节点工具类</h1>
+            
+            <p>NodeUtil 是节点的工具类，用于从 JSON 数据创建和配置节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/scene/node-util.h"</code></pre>
+
+            <h2>设计理念</h2>
+            <ul>
+                <li><strong>场景序列化</strong>：从 JSON 文件或数据中加载场景节点</li>
+                <li><strong>节点克隆</strong>：通过 JSON 配置快速创建节点</li>
+                <li><strong>批量配置</strong>：通过 JSON 批量设置节点属性</li>
+            </ul>
+
+            <h2>API 接口</h2>
+            
+            <h3>节点创建</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>add2DNode(root, data)</td><td>从 JSON 创建 2D 节点</td><td>root: 父节点，data: JSON 数据</td><td>Node2D*</td></tr>
+                    <tr><td>add3DNode(root, data)</td><td>从 JSON 创建 3D 节点</td><td>root: 父节点，data: JSON 数据</td><td>Node3D*</td></tr>
+                </tbody>
+            </table>
+
+            <h3>属性设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>set2DNodeProperty(node, data)</td><td>设置 2D 节点属性</td><td>node: 节点指针，data: JSON 数据</td><td>void</td></tr>
+                    <tr><td>set3DNodeProperty(node, data)</td><td>设置 3D 节点属性</td><td>node: 节点指针，data: JSON 数据</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>支持的 JSON 属性</h3>
+            <table>
+                <thead>
+                    <tr><th>属性名</th><th>类型</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>name</td><td>string</td><td>节点名称</td></tr>
+                    <tr><td>uuid</td><td>string</td><td>节点 UUID</td></tr>
+                    <tr><td>active</td><td>bool</td><td>激活状态</td></tr>
+                    <tr><td>position</td><td>object</td><td>位置 {x, y, z}</td></tr>
+                    <tr><td>worldPosition</td><td>object</td><td>世界位置 {x, y, z}</td></tr>
+                    <tr><td>scale</td><td>object</td><td>缩放 {x, y, z}</td></tr>
+                    <tr><td>worldScale</td><td>object</td><td>世界缩放 {x, y, z}</td></tr>
+                    <tr><td>rotation</td><td>object</td><td>旋转四元数 {x, y, z, w}</td></tr>
+                    <tr><td>worldRotation</td><td>object</td><td>世界旋转四元数 {x, y, z, w}</td></tr>
+                    <tr><td>eulerAngle</td><td>object</td><td>欧拉角 {x, y, z}</td></tr>
+                    <tr><td>groupId</td><td>int</td><td>节点组 ID</td></tr>
+                    <tr><td>anchor</td><td>object</td><td>锚点 {x, y}（2D 节点）</td></tr>
+                    <tr><td>size</td><td>object</td><td>尺寸 {width, height}（2D 节点）</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    component: {
+        title: 'Component 组件系统',
+        content: `
+            <h1>Component 组件系统设计文档</h1>
+            
+            <p>Component（组件）是 Boo 引擎中用于扩展节点功能的可插拔模块。组件必须挂载到节点（Node）上才能工作。</p>
+
+            <h2>组件类型</h2>
+            <ul>
+                <li><strong>Layer2D 组件</strong>：用于 Node2D 节点（如 UISprite、UIText）</li>
+                <li><strong>Layer3D 组件</strong>：用于 Node3D 节点（如 MeshRenderer）</li>
+            </ul>
+
+            <h2>组件层级</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Default</td><td>默认层级</td></tr>
+                    <tr><td>Layer2D</td><td>2D 组件层</td></tr>
+                    <tr><td>Layer3D</td><td>3D 组件层</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>基础信息</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getUuid()</td><td>获取组件 UUID</td><td>const string</td></tr>
+                    <tr><td>getName()</td><td>获取组件名称</td><td>string</td></tr>
+                    <tr><td>getNode()</td><td>获取所属节点</td><td>Node*</td></tr>
+                    <tr><td>getLayer()</td><td>获取组件层级</td><td>EComponentLayer</td></tr>
+                </tbody>
+            </table>
+
+            <h3>激活控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>isEnabled()</td><td>获取自身启用状态</td><td>-</td><td>bool</td></tr>
+                    <tr><td>setEnabled(enabled)</td><td>设置启用状态</td><td>enabled: true/false</td><td>void</td></tr>
+                    <tr><td>isEnabledInHierarchy()</td><td>获取层级启用状态</td><td>-</td><td>const bool</td></tr>
+                </tbody>
+            </table>
+
+            <h3>生命周期</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Awake()</td><td>组件唤醒函数（纯虚函数）</td></tr>
+                    <tr><td>Enable()</td><td>组件启用函数（纯虚函数）</td></tr>
+                    <tr><td>Update(deltaTime)</td><td>组件更新函数（纯虚函数）</td></tr>
+                    <tr><td>LateUpdate(deltaTime)</td><td>组件延迟更新函数（纯虚函数）</td></tr>
+                    <tr><td>Disable()</td><td>组件禁用函数（纯虚函数）</td></tr>
+                    <tr><td>destroy()</td><td>销毁组件</td></tr>
+                </tbody>
+            </table>
+
+            <h2>自定义组件实现</h2>
+            <p>用户可以通过继承 Component 基类来创建自定义组件：</p>
+            <pre><code>class MyComponent : public Component
+{
+public:
+    MyComponent(std::string name, Node *node, std::string uuid = "");
+    
+    void Awake() override;
+    void Enable() override;
+    void Update(float deltaTime) override;
+    void LateUpdate(float deltaTime) override;
+    void Disable() override;
+    void destroy() override;
+    
+    ~MyComponent() override;
+};
+
+// 注册组件
+REGISTER_COMPONENT(MyComponent, "My Custom Component")</code></pre>
+        `
+    },
+    camera: {
+        title: 'Camera 相机组件',
+        content: `
+            <h1>Camera 相机组件</h1>
+            
+            <p>Camera（相机组件）是场景中用于渲染视图的组件。每个相机对应一个离屏渲染目标（RenderTexture），将可见物体渲染到贴图上，然后再将贴图渲染到屏幕上。</p>
+
+            <h2>组件层级</h2>
+            <p>Default 组件，可以添加到 Node2D 或 Node3D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/renderer/camera.h"</code></pre>
+
+            <h2>关键属性</h2>
+            <table>
+                <thead>
+                    <tr><th>属性</th><th>默认值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>_priority</td><td>0</td><td>渲染优先级</td></tr>
+                    <tr><td>_groupIds</td><td>1</td><td>可见性组 ID</td></tr>
+                    <tr><td>_projection</td><td>Perspective</td><td>投影类型</td></tr>
+                    <tr><td>_fov</td><td>45.0f</td><td>视场角度（度）</td></tr>
+                    <tr><td>_nearClip</td><td>0.1f</td><td>近裁剪平面</td></tr>
+                    <tr><td>_farClip</td><td>100.0f</td><td>远裁剪平面</td></tr>
+                    <tr><td>_orthoHeight</td><td>1.0f</td><td>正交投影高度</td></tr>
+                    <tr><td>_isOnScreen</td><td>false</td><td>是否在屏幕上显示</td></tr>
+                </tbody>
+            </table>
+
+            <h2>核心概念</h2>
+            <h3>投影类型（ECameraProjection）</h3>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Ortho</td><td>正交投影</td></tr>
+                    <tr><td>Perspective</td><td>透视投影</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>屏幕设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setIsOnScreen(isOnScreen)</td><td>设置是否在屏幕上显示</td><td>isOnScreen: true/false</td><td>void</td></tr>
+                    <tr><td>getIsOnScreen()</td><td>获取是否在屏幕上显示</td><td>-</td><td>bool</td></tr>
+                </tbody>
+            </table>
+
+            <h3>优先级设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setPriority(priority)</td><td>设置渲染优先级</td><td>priority: 优先级（越小越先渲染）</td><td>void</td></tr>
+                    <tr><td>getPriority()</td><td>获取渲染优先级</td><td>-</td><td>int</td></tr>
+                </tbody>
+            </table>
+
+            <h3>可见性组</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setGroupIDs(groupIDs)</td><td>设置可见性组 ID</td><td>groupIDs: 组 ID 位掩码</td><td>void</td></tr>
+                    <tr><td>addGroupID(groupID)</td><td>添加可见性组 ID</td><td>groupID: 组 ID（整数值）</td><td>void</td></tr>
+                    <tr><td>getGroupIDs()</td><td>获取可见性组 ID</td><td>-</td><td>int</td></tr>
+                </tbody>
+            </table>
+
+            <h3>投影设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setProjection(projection)</td><td>设置投影类型</td><td>projection: ECameraProjection 枚举</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>视图更新</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>updateViewSize()</td><td>更新视图大小</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    meshrenderer: {
+        title: 'MeshRenderer 网格渲染组件',
+        content: `
+            <h1>MeshRenderer 网格渲染组件</h1>
+            
+            <p>MeshRenderer（网格渲染组件）用于在 3D 场景中渲染网格模型。通过 MeshRenderer 组件，可以将 MeshAsset 网格资源和 MaterialAsset 材质资源绑定到节点上，实现模型的显示。</p>
+
+            <h2>组件层级</h2>
+            <p>Layer3D 组件，只能添加到 Node3D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/renderer/3d/mesh-renderer.h"</code></pre>
+
+            <h2>关键属性</h2>
+            <table>
+                <thead>
+                    <tr><th>属性</th><th>默认值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>_meshAsset</td><td>nullptr</td><td>网格资产</td></tr>
+                    <tr><td>_materials</td><td>[]</td><td>材质数组</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>网格设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setMesh(meshUuid)</td><td>通过 UUID 设置网格资产</td><td>meshUuid: 网格 UUID</td><td>void</td></tr>
+                    <tr><td>setMesh(meshAsset)</td><td>直接设置网格资产</td><td>meshAsset: MeshAsset 指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>材质设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setMaterial(materialName)</td><td>通过名称设置材质</td><td>materialName: 材质名称</td><td>void</td></tr>
+                    <tr><td>setMaterial(materialAsset)</td><td>直接设置材质资产</td><td>materialAsset: MaterialAsset 指针</td><td>void</td></tr>
+                    <tr><td>setMaterial(index, materialName)</td><td>通过索引设置子材质</td><td>index: 索引，materialName: 材质名称</td><td>void</td></tr>
+                    <tr><td>setMaterial(index, materialAsset)</td><td>通过索引设置子材质</td><td>index: 索引，materialAsset: MaterialAsset 指针</td><td>void</td></tr>
+                    <tr><td>getMaterial()</td><td>获取主材质</td><td>-</td><td>MaterialAsset*</td></tr>
+                    <tr><td>getMaterial(index)</td><td>通过索引获取材质</td><td>index: 索引</td><td>MaterialAsset*</td></tr>
+                    <tr><td>getMaterials()</td><td>获取所有材质</td><td>-</td><td>vector&lt;MaterialAsset*&gt;</td></tr>
+                </tbody>
+            </table>
+
+            <h3>纹理设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setTexture(path)</td><td>通过路径设置纹理</td><td>path: 纹理路径</td><td>void</td></tr>
+                    <tr><td>setTexture(texture)</td><td>直接设置纹理</td><td>texture: TextureAsset 指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>渲染控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Render(camera)</td><td>执行渲染</td><td>camera: 相机指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    uisprite: {
+        title: 'UISprite UI精灵组件',
+        content: `
+            <h1>UISprite UI 精灵组件</h1>
+            
+            <p>UISprite（UI 精灵组件）用于在 2D 界面上显示图片。通过 UISprite 组件，可以将纹理绑定到节点上，实现图片的显示。</p>
+
+            <h2>组件层级</h2>
+            <p>Layer2D 组件，只能添加到 Node2D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/renderer/ui/ui-sprite.h"</code></pre>
+
+            <h2>尺寸模式（ESizeMode）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Raw</td><td>图片原始尺寸</td></tr>
+                    <tr><td>Custom</td><td>自定义尺寸</td></tr>
+                </tbody>
+            </table>
+
+            <h2>关键属性</h2>
+            <table>
+                <thead>
+                    <tr><th>属性</th><th>默认值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>_textureAsset</td><td>nullptr</td><td>纹理资产</td></tr>
+                    <tr><td>_materialAsset</td><td>-</td><td>材质资产</td></tr>
+                    <tr><td>sizeMode</td><td>Custom</td><td>尺寸模式</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>纹理设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setTexture(texture)</td><td>通过路径设置纹理</td><td>texture: 纹理路径</td><td>void</td></tr>
+                    <tr><td>setTexture(textureAsset)</td><td>直接设置纹理资产</td><td>textureAsset: TextureAsset 指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>材质设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setMaterial(material)</td><td>通过名称设置材质</td><td>material: 材质名称</td><td>void</td></tr>
+                    <tr><td>setMaterial(materialAsset)</td><td>直接设置材质资产</td><td>materialAsset: MaterialAsset 指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>颜色设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setColor(color)</td><td>设置颜色</td><td>color: Color 引用</td><td>void</td></tr>
+                    <tr><td>setColor(color)</td><td>通过字符串设置颜色</td><td>color: 颜色字符串（如 "#FF0000"）</td><td>void</td></tr>
+                    <tr><td>setColor(r, g, b, a)</td><td>通过 RGBA 设置颜色</td><td>r, g, b, a: 颜色分量（0-1）</td><td>void</td></tr>
+                    <tr><td>setAlpha(alpha)</td><td>设置透明度</td><td>alpha: 透明度（0-1）</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>尺寸模式</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setSizeMode(sizeMode)</td><td>设置尺寸模式</td><td>sizeMode: ESizeMode 枚举</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>渲染控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Render(camera)</td><td>执行渲染</td><td>camera: 相机指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    uitext: {
+        title: 'UIText UI文本组件',
+        content: `
+            <h1>UIText UI 文本组件</h1>
+            
+            <p>UIText（UI 文本组件）用于在 2D 界面上显示文本。通过 UIText 组件，可以设置文本内容、字体大小、行高等属性，实现文字的显示。</p>
+
+            <h2>组件层级</h2>
+            <p>Layer2D 组件，只能添加到 Node2D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/renderer/ui/ui-text.h"</code></pre>
+
+            <h2>关键属性</h2>
+            <table>
+                <thead>
+                    <tr><th>属性</th><th>默认值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>_text</td><td>""</td><td>文本内容</td></tr>
+                    <tr><td>_fontSize</td><td>30</td><td>字体大小</td></tr>
+                    <tr><td>_lineHeight</td><td>35</td><td>行高</td></tr>
+                    <tr><td>_color</td><td>白色</td><td>文本颜色</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>文本设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setText(text)</td><td>设置文本内容</td><td>text: 文本字符串</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>字体设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setSize(fontSize)</td><td>设置字体大小</td><td>fontSize: 字体大小（像素）</td><td>void</td></tr>
+                    <tr><td>setLineHeight(lineHeight)</td><td>设置行高</td><td>lineHeight: 行高（像素）</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>颜色设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setColor(color)</td><td>设置颜色</td><td>color: Color 引用</td><td>void</td></tr>
+                    <tr><td>setColor(color)</td><td>通过字符串设置颜色</td><td>color: 颜色字符串（如 "#FF0000"）</td><td>void</td></tr>
+                    <tr><td>setColor(r, g, b, a)</td><td>通过 RGBA 设置颜色</td><td>r, g, b, a: 颜色分量（0-1）</td><td>void</td></tr>
+                    <tr><td>setAlpha(alpha)</td><td>设置透明度</td><td>alpha: 透明度（0-1）</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>材质设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setMaterial(material)</td><td>通过名称设置材质</td><td>material: 材质名称</td><td>void</td></tr>
+                    <tr><td>setMaterial(materialAsset)</td><td>直接设置材质资产</td><td>materialAsset: MaterialAsset 指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>渲染控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Render(camera)</td><td>执行渲染</td><td>camera: 相机指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    uimask: {
+        title: 'UIMask UI遮罩组件',
+        content: `
+            <h1>UIMask UI 遮罩组件</h1>
+            
+            <p>UIMask（UI 遮罩组件）用于在 2D 界面上创建遮罩效果。通过 UIMask 组件，可以对子元素进行遮罩处理，实现圆形、圆角等特殊显示效果。</p>
+
+            <h2>组件层级</h2>
+            <p>Layer2D 组件，只能添加到 Node2D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/renderer/ui/ui-mask.h"</code></pre>
+        `
+    },
+    editorcamera: {
+        title: 'EditorCamera 编辑器相机组件',
+        content: `
+            <h1>EditorCamera 编辑器相机组件</h1>
+            
+            <p>EditorCamera（编辑器相机组件）用于在编辑器场景中提供视角控制。通过 EditorCamera 组件，可以实现鼠标滚轮缩放、中键拖拽旋转等相机操作。</p>
+
+            <h2>组件层级</h2>
+            <p>Default 组件，可以添加到 Node2D 或 Node3D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/components/tool/editor-camera.h"</code></pre>
+
+            <h2>关键属性</h2>
+            <table>
+                <thead>
+                    <tr><th>属性</th><th>默认值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>_focusRadius</td><td>10.0f</td><td>焦点半径</td></tr>
+                    <tr><td>_rotateOffsetH</td><td>0.0f</td><td>水平旋转偏移</td></tr>
+                    <tr><td>_rotateOffsetV</td><td>0.0f</td><td>垂直旋转偏移</td></tr>
+                    <tr><td>_worldFocusPos</td><td>(0,0,0)</td><td>世界焦点位置</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>相机控制</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setFocusRadius(radius)</td><td>设置焦点半径</td><td>radius: 半径值</td><td>void</td></tr>
+                    <tr><td>setRotateOffsetH(offset)</td><td>设置水平旋转偏移</td><td>offset: 偏移角度</td><td>void</td></tr>
+                    <tr><td>setRotateOffsetV(offset)</td><td>设置垂直旋转偏移</td><td>offset: 偏移角度</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    groundgrid: {
+        title: 'GroundGrid 地面网格组件',
+        content: `
+            <h1>GroundGrid 地面网格组件</h1>
+            
+            <p>GroundGrid（地面网格组件）用于在 3D 场景中显示地面网格。通过 GroundGrid 组件，可以创建一个带有网格纹理的平面，用于场景参考和调试。</p>
+
+            <h2>组件层级</h2>
+            <p>Layer3D 组件，只能添加到 Node3D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/components/tool/ground-grid.h"</code></pre>
+
+            <h2>关键属性</h2>
+            <table>
+                <thead>
+                    <tr><th>属性</th><th>默认值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>_meshAsset</td><td>nullptr</td><td>网格资产</td></tr>
+                    <tr><td>_materialAsset</td><td>nullptr</td><td>材质资产</td></tr>
+                    <tr><td>_meshRenderer</td><td>nullptr</td><td>网格渲染组件</td></tr>
+                    <tr><td>_vertShaderAsset</td><td>nullptr</td><td>顶点着色器资产</td></tr>
+                    <tr><td>_fragShaderAsset</td><td>nullptr</td><td>片段着色器资产</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    gltfcomponent: {
+        title: 'GLTFComponent GLTF组件',
+        content: `
+            <h1>GLTFComponent GLTF 组件</h1>
+            
+            <p>GLTFComponent（GLTF 组件）用于加载和解析 GLTF 格式的 3D 模型文件。</p>
+
+            <h2>组件层级</h2>
+            <p>Layer3D 组件，只能添加到 Node3D 节点。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/components/3d/gltf-component.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>GLTF 资源设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setGLTFAsset(gltfAssetPath)</td><td>通过路径设置 GLTF 资产</td><td>gltfAssetPath: GLTF 资产路径</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>材质设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setMaterial(meshNodePath, meshIndex, materialPath)</td><td>设置指定网格节点的材质</td><td>meshNodePath, meshIndex, materialPath</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    assetmanager: {
+        title: 'AssetManager 资产管理器',
+        content: `
+            <h1>AssetManager 资产管理器</h1>
+            
+            <p>AssetManager（资产管理器）是引擎中统一管理所有资源的模块，负责资源的加载、缓存和卸载。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/asset/asset-manager.h"</code></pre>
+
+            <h2>支持的资源类型</h2>
+            <table>
+                <thead>
+                    <tr><th>扩展名</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>.png</td><td>PNG 纹理</td></tr>
+                    <tr><td>.jpg</td><td>JPG 纹理</td></tr>
+                    <tr><td>.jpeg</td><td>JPEG 纹理</td></tr>
+                    <tr><td>.vert</td><td>顶点着色器</td></tr>
+                    <tr><td>.frag</td><td>片段着色器</td></tr>
+                    <tr><td>.mtl</td><td>材质文件</td></tr>
+                    <tr><td>.glb</td><td>GLB 模型</td></tr>
+                </tbody>
+            </table>
+
+            <h2>资源类型（EAssetType）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>None</td><td>无类型</td></tr>
+                    <tr><td>Texture</td><td>纹理资源</td></tr>
+                    <tr><td>Audio</td><td>音频资源</td></tr>
+                    <tr><td>Font</td><td>字体资源</td></tr>
+                    <tr><td>Shader</td><td>着色器资源</td></tr>
+                    <tr><td>Material</td><td>材质资源</td></tr>
+                    <tr><td>Scene</td><td>场景资源</td></tr>
+                    <tr><td>GLTF</td><td>GLTF 模型资源</td></tr>
+                    <tr><td>Mesh</td><td>网格资源</td></tr>
+                </tbody>
+            </table>
+
+            <h2>网格模式（EMeshMode）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>UI</td><td>UI 网格</td></tr>
+                    <tr><td>Model</td><td>模型网格</td></tr>
+                </tbody>
+            </table>
+
+            <h2>网格类型（EMeshType）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Static</td><td>静态网格</td></tr>
+                    <tr><td>Dynamic</td><td>动态网格</td></tr>
+                </tbody>
+            </table>
+
+            <h2>纹理类型（ETextureType）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Static</td><td>静态纹理</td></tr>
+                    <tr><td>Dynamic</td><td>动态纹理</td></tr>
+                </tbody>
+            </table>
+
+            <h2>渲染器层（ERendererLayer）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>UI</td><td>UI 渲染器层</td></tr>
+                    <tr><td>Model</td><td>模型渲染器层</td></tr>
+                </tbody>
+            </table>
+
+            <h2>渲染器类型（ERendererType）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Opaque</td><td>不透明渲染器</td></tr>
+                    <tr><td>Transparent</td><td>透明渲染器</td></tr>
+                </tbody>
+            </table>
+
+            <h2>API 接口</h2>
+            
+            <h3>资源加载</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>loadAsset(uuid)</td><td>加载指定 UUID 的资源</td><td>uuid: 资源 UUID</td><td>Asset*</td></tr>
+                    <tr><td>getAsset(uuid, loadIfNotFound)</td><td>获取指定 UUID 的资源</td><td>uuid: 资源 UUID，loadIfNotFound: 未找到时是否加载</td><td>Asset*</td></tr>
+                </tbody>
+            </table>
+
+            <h3>资源卸载</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>unloadAsset(uuid)</td><td>卸载指定 UUID 的资源</td><td>uuid: 资源 UUID</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    meshasset: {
+        title: 'MeshAsset 网格资产',
+        content: `
+            <h1>MeshAsset 网格资产</h1>
+            
+            <p>MeshAsset（网格资产）用于存储 3D 模型的网格数据，包括顶点位置，法线、UV 坐标、索引等信息。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/asset/mesh-asset.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>网格创建</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>create(primitives)</td><td>创建静态网格</td><td>primitives: 网格原语列表</td><td>void</td></tr>
+                    <tr><td>createDynamic(primitives)</td><td>创建动态网格</td><td>primitives: 网格原语列表</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>网格查询</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getSubMeshCount()</td><td>获取子网格数量</td><td>size_t</td></tr>
+                    <tr><td>getGfxMesh(index)</td><td>获取指定索引的图形网格</td><td>GfxMesh*</td></tr>
+                </tbody>
+            </table>
+
+            <h2>网格模式（EMeshMode）</h2>
+            <table>
+                <thead>
+                    <tr><th>值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>UI</td><td>UI 网格</td></tr>
+                    <tr><td>Model</td><td>模型网格</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    materialasset: {
+        title: 'MaterialAsset 材质资产',
+        content: `
+            <h1>MaterialAsset 材质资产</h1>
+            
+            <p>MaterialAsset（材质资产）用于存储材质的配置数据，包括顶点着色器、片段着色器、纹理、渲染状态等信息。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/asset/material-asset.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>材质创建</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>create(materialData)</td><td>通过 JSON 数据创建材质</td><td>materialData: JSON 格式的材质数据</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>着色器设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setVertexShader(vert)</td><td>设置顶点着色器</td><td>vert: ShaderAsset 指针或路径</td><td>void</td></tr>
+                    <tr><td>setFragmentShader(frag)</td><td>设置片段着色器</td><td>frag: ShaderAsset 指针或路径</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>纹理设置</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>setTexture(texture)</td><td>设置主纹理</td><td>texture: TextureAsset 指针</td><td>void</td></tr>
+                    <tr><td>setTexture(key, texture)</td><td>设置指定键的纹理</td><td>key: 纹理键，texture: TextureAsset 指针</td><td>void</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    shaderasset: {
+        title: 'ShaderAsset 着色器资产',
+        content: `
+            <h1>ShaderAsset 着色器资产</h1>
+            
+            <p>ShaderAsset（着色器资产）用于存储着色器代码，包括顶点着色器和片段着色器。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/asset/shader-asset.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>着色器创建</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>create(type, glslData, macros)</td><td>通过 GLSL 代码创建着色器</td><td>type: 着色器类型，glslData: GLSL 代码</td><td>void</td></tr>
+                    <tr><td>create(data)</td><td>通过 SPIR-V 数据创建着色器</td><td>data: SPIR-V 数据向量</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h2>着色器类型</h2>
+            <table>
+                <thead>
+                    <tr><th>常量名</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>ShaderVertexAsset</td><td>顶点着色器</td></tr>
+                    <tr><td>ShaderFragmentAsset</td><td>片段着色器</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    textureasset: {
+        title: 'TextureAsset 纹理资产',
+        content: `
+            <h1>TextureAsset 纹理资产</h1>
+            
+            <p>TextureAsset（纹理资产）用于存储纹理图像数据，包括宽度、高度、通道数、像素数据等信息。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/asset/texture-asset.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>纹理创建</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>create(width, height, channels, pixelsVector, format)</td><td>通过像素数据创建纹理</td><td>width, height, channels, pixelsVector, format</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h3>纹理查询</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>getWidth()</td><td>获取纹理宽度</td><td>const int</td></tr>
+                    <tr><td>getHeight()</td><td>获取纹理高度</td><td>const int</td></tr>
+                    <tr><td>channels()</td><td>获取纹理通道数</td><td>int</td></tr>
+                    <tr><td>getGfxTexture()</td><td>获取图形纹理</td><td>GfxTexture*</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    gltfasset: {
+        title: 'GLTFAsset GLTF资产',
+        content: `
+            <h1>GLTFAsset GLTF 资产</h1>
+            
+            <p>GLTFAsset（GLTF 资产）用于加载和解析 GLTF 格式的 3D 模型文件，将 GLTF 数据转换为引擎可用的 MeshAsset。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/asset/gltf-asset.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>GLTF 解析</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>create(m_asset)</td><td>解析 GLTF 数据</td><td>m_asset: fastgltf Asset 指针</td><td>void</td></tr>
+                    <tr><td>getRoot()</td><td>获取 GLTF 根节点</td><td>-</td><td>const GLTFNode&</td></tr>
+                    <tr><td>getMeshs()</td><td>获取所有网格资产</td><td>-</td><td>map&lt;string, MeshAsset*&gt;&</td></tr>
+                    <tr><td>getMesh(meshName)</td><td>获取指定名称的网格资产</td><td>meshName: 网格名称</td><td>MeshAsset*</td></tr>
+                </tbody>
+            </table>
+        `
+    },
+    alpha: {
+        title: 'Alpha 启动场景',
+        content: `
+            <h1>Alpha 启动场景</h1>
+            
+            <p>Alpha（启动场景）是引擎启动时的过渡界面，不可取消，但可以自定义背景颜色、Logo 以及显示时间。</p>
+
+            <h2>头文件</h2>
+            <pre><code>#include "core/alpha/alpha.h"</code></pre>
+
+            <h2>API 接口</h2>
+            
+            <h3>构造函数</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code class="inline">Alpha(name, uuid = "")</code></td><td>创建启动场景</td></tr>
+                </tbody>
+            </table>
+
+            <h3>生命周期</h3>
+            <table>
+                <thead>
+                    <tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>update(deltaTime)</td><td>每帧更新</td><td>deltaTime: 时间增量</td><td>void</td></tr>
+                    <tr><td>destroy()</td><td>销毁场景</td><td>-</td><td>void</td></tr>
+                </tbody>
+            </table>
+
+            <h2>特性说明</h2>
+            <ul>
+                <li><strong>背景</strong>：启动画面背景图片</li>
+                <li><strong>Logo</strong>：自定义 Logo 显示</li>
+                <li><strong>显示时间</strong>：可配置 Logo 显示持续时间</li>
+            </ul>
+        `
+    },
+    multiplatform: {
+        title: '多平台适配教程',
+        content: `
+            <h1>多平台适配教程</h1>
+            
+            <p>本教程介绍如何使用 Boo Engine 进行跨平台开发，支持 macOS 和 Windows 两个平台。</p>
+
+            <h2>环境要求</h2>
+            <table>
+                <thead>
+                    <tr><th>平台</th><th>必需工具</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>macOS</td><td>CMake 3.15+、Xcode 命令行工具</td></tr>
+                    <tr><td>Windows</td><td>CMake 3.15+、Visual Studio</td></tr>
+                </tbody>
+            </table>
+
+            <h2>第一步：构建引擎</h2>
+            <p>首先需要构建 Boo Engine 引擎库，请参考构建文档进行构建。</p>
+
+            <h3>macOS 构建</h3>
+            <pre><code># Debug 构建
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+
+# Release 构建
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+# 构建项目
+cmake --build build
+
+# 安装到 dist 目录
+cmake --install build --prefix ./dist</code></pre>
+
+            <h3>Windows 构建</h3>
+            <pre><code># 创建构建目录
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+# Release 构建
+cmake --build build --config Release
+
+# 安装到 dist 目录
+cmake --install build --prefix ./dist --config Release</code></pre>
+
+            <h2>第二步：准备引擎目录</h2>
+            <p>构建完成后，将 <code>dist/</code> 目录复制到项目根目录，建议重命名为 <code>engine/</code>：</p>
+            <pre><code>your-project/
+├── engine/              # 从 dist 复制，重命名
+│   ├── include/
+│   │   ├── engine/     # 引擎头文件
+│   │   └── libs/       # 三方库头文件
+│   └── libs/           # 预编译库
+├── src/                # 你的源代码
+├── assets/             # 资源文件
+├── CMakeLists.txt     # CMake 配置
+└── app.cpp            # 入口文件</code></pre>
+
+            <h2>第三步：配置 CMake</h2>
+            <p>参考 Boo-Engine-Bricked 项目的 CMakeLists.txt 配置：</p>
+
+            <h3>基础配置</h3>
+            <pre><code>cmake_minimum_required(VERSION 3.15)
+project(YourProject)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# 设置引擎目录
+set(BOO_ENGINE_DIR \${CMAKE_CURRENT_SOURCE_DIR}/engine)
+add_library(BooEngine STATIC IMPORTED)
+
+# 平台相关的库文件
+if(APPLE)
+    set_target_properties(BooEngine PROPERTIES
+        IMPORTED_LOCATION_DEBUG \${BOO_ENGINE_DIR}/libs/libBooEngined.a
+        IMPORTED_LOCATION_RELEASE \${BOO_ENGINE_DIR}/libs/libBooEngine.a
+    )
+elseif(WIN32)
+    set_target_properties(BooEngine PROPERTIES
+        IMPORTED_LOCATION_DEBUG \${BOO_ENGINE_DIR}/libs/BooEngined.lib
+        IMPORTED_LOCATION_RELEASE \${BOO_ENGINE_DIR}/libs/BooEngine.lib
+    )
+endif()</code></pre>
+
+            <h3>头文件目录</h3>
+            <pre><code>target_include_directories(BooEngine INTERFACE
+    \${BOO_ENGINE_DIR}/include
+    \${BOO_ENGINE_DIR}/include/libs/fastgltf
+    \${BOO_ENGINE_DIR}/include/libs/freetype2
+    \${BOO_ENGINE_DIR}/include/libs/glfw
+    \${BOO_ENGINE_DIR}/include/libs/glslang
+    \${BOO_ENGINE_DIR}/include/libs/nlohmann
+    \${BOO_ENGINE_DIR}/include/libs/simdjson
+    \${BOO_ENGINE_DIR}/include/libs/stb
+    \${BOO_ENGINE_DIR}/include/libs/vulkan
+    \${BOO_ENGINE_DIR}/include/libs/volk
+)</code></pre>
+
+            <h3>平台相关系统库</h3>
+            <p><strong>macOS:</strong></p>
+            <pre><code>if(APPLE)
+    find_library(COCOA_LIBRARY     Cocoa      REQUIRED)
+    find_library(FOUNDATION_LIBRARY Foundation REQUIRED)
+    find_library(APPKIT_LIBRARY    AppKit     REQUIRED)
+    find_library(IOKIT_LIBRARY     IOKit      REQUIRED)
+
+    find_package(ZLIB  REQUIRED)
+    find_package(BZip2 REQUIRED)
+    find_package(PNG   REQUIRED)
+
+    target_link_libraries(BooEngine INTERFACE
+        ZLIB::ZLIB
+        BZip2::BZip2
+        PNG::PNG
+        \${IOKIT_LIBRARY}
+        \${COCOA_LIBRARY}
+        \${FOUNDATION_LIBRARY}
+        \${APPKIT_LIBRARY}
+        \${BOO_ENGINE_DIR}/libs/freetype2/libfreetype.a
+        \${BOO_ENGINE_DIR}/libs/glfw/libglfw3.a
+        \${BOO_ENGINE_DIR}/libs/glslang/libglslang.a
+        \${BOO_ENGINE_DIR}/libs/glslang/libglslang-default-resource-limits.a
+        \${BOO_ENGINE_DIR}/libs/glslang/libSPIRV.a
+        \${BOO_ENGINE_DIR}/libs/glslang/libSPIRV-Tools.a
+        \${BOO_ENGINE_DIR}/libs/glslang/libSPIRV-Tools-opt.a
+    )
+endif()</code></pre>
+
+            <p><strong>Windows:</strong></p>
+            <pre><code>elseif(WIN32)
+    target_link_libraries(BooEngine INTERFACE
+        \${BOO_ENGINE_DIR}/libs/freetype2/freetype.lib
+        \${BOO_ENGINE_DIR}/libs/glfw/lib-vc2022/glfw3_mt.lib
+        # glslang
+        debug \${BOO_ENGINE_DIR}/libs/glslang/glslangd.lib
+        optimized \${BOO_ENGINE_DIR}/libs/glslang/glslang.lib
+        debug \${BOO_ENGINE_DIR}/libs/glslang/glslang-default-resource-limitsd.lib
+        optimized \${BOO_ENGINE_DIR}/libs/glslang/glslang-default-resource-limits.lib
+        debug \${BOO_ENGINE_DIR}/libs/glslang/SPIRVd.lib
+        optimized \${BOO_ENGINE_DIR}/libs/glslang/SPIRV.lib
+        debug \${BOO_ENGINE_DIR}/libs/glslang/SPIRV-Toolsd.lib
+        optimized \${BOO_ENGINE_DIR}/libs/glslang/SPIRV-Tools.lib
+        debug \${BOO_ENGINE_DIR}/libs/glslang/SPIRV-Tools-optd.lib
+        optimized \${BOO_ENGINE_DIR}/libs/glslang/SPIRV-Tools-opt.lib
+    )
+endif()
+
+            <h2>第四步：创建可执行文件</h2>
+            <pre><code># 收集源文件
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
+    "src/*.cpp"
+    "src/*.h"
+    "src/*.hpp"
+)
+
+# 创建可执行文件
+add_executable(
+    \${PROJECT_NAME}
+    \${PROJECT_SOURCES}
+    app.cpp
+)
+
+# 链接引擎
+target_link_libraries(\${PROJECT_NAME} PRIVATE BooEngine)
+target_include_directories(\${PROJECT_NAME} PRIVATE
+    \${CMAKE_CURRENT_SOURCE_DIR}/src
+)</code></pre>
+
+            <h2>第五步：资源复制</h2>
+            <p>构建后需要将资源文件复制到输出目录：</p>
+            <pre><code># 资源复制
+if(APPLE)
+    add_custom_command(TARGET \${PROJECT_NAME} POST_BUILD
+        COMMAND \${CMAKE_COMMAND} -E rm -rf "$\$<TARGET_FILE_DIR:\${PROJECT_NAME}>/assets"
+        COMMAND \${CMAKE_COMMAND} -E copy_directory "\${CMAKE_CURRENT_SOURCE_DIR}/assets" "$\$<TARGET_FILE_DIR:\${PROJECT_NAME}>/assets"
+        COMMENT "复制 assets 到构建目录"
+    )
+elseif(WIN32)
+    add_custom_command(TARGET \${PROJECT_NAME} POST_BUILD
+        COMMAND \${CMAKE_COMMAND} -E rm -rf "$\$<TARGET_FILE_DIR:\${PROJECT_NAME}>/assets"
+        COMMAND \${CMAKE_COMMAND} -E copy_directory "\${CMAKE_CURRENT_SOURCE_DIR}/assets" "$\$<TARGET_FILE_DIR:\${PROJECT_NAME}>/assets"
+        COMMENT "复制 assets 到构建目录"
+    )
+    set_target_properties(\${PROJECT_NAME} PROPERTIES
+        VS_DEBUGGER_WORKING_DIRECTORY "$\$<TARGET_FILE_DIR:\${PROJECT_NAME}>"
+    )
+endif()</code></code></pre>
+
+            <h2>构建与运行</h2>
+
+            <h3>macOS</h3>
+            <pre><code># Debug
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+./build/YourProject
+
+# Release
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+./build/YourProject</code></pre>
+
+            <h3>Windows</h3>
+            <pre><code># 使用 Visual Studio 打开或命令行构建
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+cmake --build build --config Release
+.\\build\\Release\\YourProject.exe</code></pre>
+
+            <h2>注意事项</h2>
+            <ul>
+                <li><strong>库文件命名</strong>：macOS 使用 <code>.a</code> 静态库，Windows 使用 <code>.lib</code></li>
+                <li><strong>Debug/Release</strong>：Windows 需要根据配置选择对应的库文件（带 <code>d</code> 后缀的是 Debug 版本）</li>
+                <li><strong>资源路径</strong>：确保 <code>assets</code> 目录在构建输出的可执行文件旁边</li>
+                <li><strong>三方库头文件</strong>：构建时可以通过 <code>-DBOO_INSTALL_THIRDPARTY_HEADERS=OFF</code> 关闭三方头文件安装</li>
+            </ul>
+        `
+    }
+};
+
+// 主应用类
+class BooDocsApp {
+    constructor() {
+        this.searchInput = document.getElementById('searchInput');
+        this.navMenu = document.getElementById('navMenu');
+        this.contentArea = document.getElementById('contentArea');
+        this.currentId = 'home';
+        this.expandedGroups = new Set(['渲染组件', 'ui_render', '3d_render', '其他组件', '3d_other', 'tool_other']);
+        
+        this.init();
+    }
+
+    init() {
+        this.renderNav();
+        this.bindEvents();
+        this.navigate('home');
+    }
+
+    // 渲染导航菜单
+    renderNav() {
+        let html = '';
+        DOCS_DATA.forEach(group => {
+            if (group.children) {
+                const expandKey = group.expandId || group.title;
+                const isExpanded = group.alwaysExpanded || this.expandedGroups.has(expandKey);
+                html += `<div class="nav-group">
+                    <div class="nav-group-title${group.alwaysExpanded ? '' : ' expandable'}" ${!group.alwaysExpanded ? `data-group="${expandKey}"` : ''}>
+                        ${!group.alwaysExpanded ? `<svg class="expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            ${isExpanded ? '<path d="M6 9l6 6 6-6"/>' : '<path d="M9 6l6 6-6 6"/>'}
+                        </svg>` : ''}
+                        ${group.title}
+                    </div>`;
+                
+                if (isExpanded) {
+                    html += this.renderNestedGroup(group.children);
+                }
+                html += '</div>';
+            } else {
+                html += `<div class="nav-group">
+                    <div class="nav-group-title">${group.title}</div>`;
+            
+                group.items.forEach(item => {
+                    const isActive = item.id === this.currentId ? 'active' : '';
+                    html += `<a class="nav-item ${isActive}" data-id="${item.id}">${item.name}</a>`;
+                });
+            
+                html += '</div>';
+            }
+        });
+        
+        this.navMenu.innerHTML = html;
+    }
+
+    // 渲染嵌套组
+    renderNestedGroup(children) {
+        let html = '<div class="nav-nested">';
+        
+        children.forEach(child => {
+            if (child.id) {
+                const isActive = child.id === this.currentId ? 'active' : '';
+                html += `<a class="nav-item ${isActive}" data-id="${child.id}">${child.name}</a>`;
+            } else if (child.children) {
+                const expandKey = child.expandId || child.title;
+                const isExpanded = this.expandedGroups.has(expandKey);
+                html += `<div class="nav-subgroup">
+                    <div class="nav-subgroup-title expandable" data-group="${expandKey}">
+                        <svg class="expand-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            ${isExpanded ? '<path d="M6 9l6 6 6-6"/>' : '<path d="M9 6l6 6-6 6"/>'}
+                        </svg>
+                        ${child.title}
+                    </div>`;
+                
+                if (isExpanded) {
+                    html += this.renderNestedGroup(child.children);
+                }
+                html += '</div>';
+            } else if (child.items) {
+                child.items.forEach(item => {
+                    const isActive = item.id === this.currentId ? 'active' : '';
+                    html += `<a class="nav-item nav-item-nested ${isActive}" data-id="${item.id}">${item.name}</a>`;
+                });
+            }
+        });
+        
+        html += '</div>';
+        return html;
+    }
+
+    // 绑定事件
+    bindEvents() {
+        // 导航点击
+        this.navMenu.addEventListener('click', (e) => {
+            const navItem = e.target.closest('.nav-item');
+            if (navItem) {
+                const id = navItem.dataset.id;
+                this.navigate(id);
+                return;
+            }
+
+            // 展开/收起点击
+            const expandable = e.target.closest('.expandable');
+            if (expandable) {
+                const groupTitle = expandable.dataset.group;
+                this.toggleExpand(groupTitle);
+            }
+        });
+
+        // 搜索功能
+        this.searchInput.addEventListener('input', (e) => {
+            this.handleSearch(e.target.value);
+        });
+    }
+
+    // 切换展开/收起
+    toggleExpand(groupTitle) {
+        if (this.expandedGroups.has(groupTitle)) {
+            this.expandedGroups.delete(groupTitle);
+        } else {
+            this.expandedGroups.add(groupTitle);
+        }
+        this.renderNav();
+    }
+
+    // 导航到指定页面
+    navigate(id) {
+        this.currentId = id;
+        
+        // 更新导航状态
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.toggle('active', item.dataset.id === id);
+        });
+
+        // 渲染内容
+        const doc = DOCS_CONTENT[id];
+        if (doc) {
+            this.contentArea.innerHTML = `<div class="content-card">${doc.content}</div>`;
+        } else {
+            this.contentArea.innerHTML = `<div class="content-card"><h1>页面未找到</h1><p>无法加载页面: ${id}</p></div>`;
+        }
+
+        // 清空搜索
+        this.searchInput.value = '';
+    }
+
+    // 搜索功能
+    handleSearch(query) {
+        if (!query.trim()) {
+            this.renderNav();
+            return;
+        }
+
+        query = query.toLowerCase();
+        let html = '';
+        
+        DOCS_DATA.forEach(group => {
+            const matchedItems = group.items.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.id.toLowerCase().includes(query)
+            );
+            
+            if (matchedItems.length > 0) {
+                html += `<div class="nav-group">
+                    <div class="nav-group-title">${group.title}</div>`;
+                
+                matchedItems.forEach(item => {
+                    const isActive = item.id === this.currentId ? 'active' : '';
+                    html += `<a class="nav-item ${isActive}" data-id="${item.id}">${item.name}</a>`;
+                });
+                
+                html += '</div>';
+            }
+        });
+
+        if (!html) {
+            html = '<div style="padding: 20px; color: var(--text-muted); text-align: center;">未找到匹配的文档</div>';
+        }
+
+        this.navMenu.innerHTML = html;
+    }
+}
+
+// 初始化应用
+document.addEventListener('DOMContentLoaded', () => {
+    window.app = new BooDocsApp();
+});

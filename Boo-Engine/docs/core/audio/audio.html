@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>Audio 音频实例</h1>
+
+<h2>概述</h2>
+<p>Audio（音频实例）是引擎中用于控制单个音频播放的类。通过 AudioManager 播放音乐或音效后，会返回一个 Audio 指针，用于控制该音频的播放状态、音量等属性。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/audio/audio.h"</code></pre>
+
+<h2>枚举类型</h2>
+
+<h3>音频状态（EAudioState）</h3>
+<table>
+    <thead><tr><th>值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>None</td><td>无状态</td></tr>
+        <tr><td>Initialized</td><td>已初始化</td></tr>
+        <tr><td>Playing</td><td>正在播放</td></tr>
+        <tr><td>Paused</td><td>已暂停</td></tr>
+        <tr><td>Stopped</td><td>已停止</td></tr>
+    </tbody>
+</table>
+
+<h3>音频类型（EAudioType）</h3>
+<table>
+    <thead><tr><th>值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>Music</td><td>音乐</td></tr>
+        <tr><td>Sound</td><td>音效</td></tr>
+    </tbody>
+</table>
+
+<h2>API 接口</h2>
+
+<h3>播放控制</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>play(loop)</td><td>开始/继续播放</td><td>loop: 是否循环</td><td>void</td></tr>
+        <tr><td>pause()</td><td>暂停播放</td><td>-</td><td>void</td></tr>
+        <tr><td>resume()</td><td>继续播放</td><td>-</td><td>void</td></tr>
+        <tr><td>stop()</td><td>停止播放</td><td>-</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>音量控制</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setVolume(volume)</td><td>设置音量</td><td>volume: 音量值（0-1）</td><td>void</td></tr>
+        <tr><td>getVolume()</td><td>获取音量</td><td>-</td><td>float</td></tr>
+    </tbody>
+</table>
+
+<h3>状态查询</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>getState()</td><td>获取当前状态</td><td>-</td><td>EAudioState</td></tr>
+        <tr><td>getId()</td><td>获取音频 ID</td><td>-</td><td>const int</td></tr>
+    </tbody>
+</table>
+
+<h3>更新与销毁</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>update(dt)</td><td>每帧更新</td><td>dt: 时间增量</td><td>void</td></tr>
+        <tr><td>destroy()</td><td>销毁音频实例</td><td>-</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h2>使用示例</h2>
+
+<pre><code>// ── 播放背景音乐 ─────────────────────────────────────
+auto *bgMusic = Boo::audioManager->playMusic("audio/bgm.mp3", true);
+if (bgMusic)
+{
+    bgMusic->setVolume(0.5f);
+}
+
+// ── 暂停音乐 ─────────────────────────────────────────
+bgMusic->pause();
+
+// ── 继续播放 ─────────────────────────────────────────
+bgMusic->resume();
+
+// ── 停止音乐 ─────────────────────────────────────────
+bgMusic->stop();
+
+// ── 播放音效 ─────────────────────────────────────────
+auto *clickSound = Boo::audioManager->playSound("audio/click.wav");
+if (clickSound)
+{
+    clickSound->setVolume(1.0f);
+}</code></pre>
+</div>
+</body>
+</html>

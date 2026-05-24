@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>UIBMFontText BMFont 文本组件</h1>
+
+<h2>概述</h2>
+<p>UIBMFontText（BMFont 文本组件）用于在 2D 界面上显示 BMFont 位图字体文本。通过 BMFont 组件，可以设置文本内容、字体大小、行高等属性，实现文字的显示。</p>
+
+<h3>组件层级</h3>
+<p>Layer2D 组件，只能添加到 Node2D 节点。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/renderer/ui/ui-bmfont-text.h"</code></pre>
+
+<h2>API 接口</h2>
+
+<h3>文本设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setText(text)</td><td>设置文本内容（string）</td><td>text: 文本字符串</td><td>void</td></tr>
+        <tr><td>setText(text)</td><td>设置文本内容（wstring）</td><td>text: 宽字符串</td><td>void</td></tr>
+        <tr><td>setText(text)</td><td>设置文本内容（wchar_t*）</td><td>text: 宽字符数组</td><td>void</td></tr>
+        <tr><td>getText()</td><td>获取文本内容</td><td>-</td><td>const std::wstring&</td></tr>
+    </tbody>
+</table>
+
+<h3>字体设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setSize(fontSize)</td><td>设置字体大小</td><td>fontSize: 字体大小（像素）</td><td>void</td></tr>
+        <tr><td>getSize()</td><td>获取字体大小</td><td>-</td><td>const int&</td></tr>
+        <tr><td>setLineHeight(lineHeight)</td><td>设置行高</td><td>lineHeight: 行高（像素）</td><td>void</td></tr>
+        <tr><td>getLineHeight()</td><td>获取行高</td><td>-</td><td>const int&</td></tr>
+    </tbody>
+</table>
+
+<h3>BMFont 设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setBMFont(path)</td><td>通过路径设置 BMFont</td><td>path: BMFont 路径</td><td>void</td></tr>
+        <tr><td>setBMFont(bmFont)</td><td>直接设置 BMFont 资产</td><td>bmFont: BMFontAsset 指针</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>颜色设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setColor(color)</td><td>设置颜色</td><td>color: Color 引用</td><td>void</td></tr>
+        <tr><td>setColor(r, g, b, a)</td><td>通过 RGBA 设置颜色</td><td>r, g, b, a: 颜色分量（0-1）</td><td>void</td></tr>
+        <tr><td>setAlpha(alpha)</td><td>设置透明度</td><td>alpha: 透明度（0-1）</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h2>使用示例</h2>
+
+<pre><code>auto *textNode = new Boo::Node2D("text");
+textNode->setPosition(360.0f, 640.0f, 0.0f);
+_node2d->addChild(textNode);
+
+auto *text = dynamic_cast&lt;Boo::UIBMFontText *&gt;(textNode->addComponent("UIBMFontText"));
+if (text)
+{
+    text->setText("Hello World");
+    text->setSize(40);
+    text->setLineHeight(50);
+}</code></pre>
+</div>
+</body>
+</html>

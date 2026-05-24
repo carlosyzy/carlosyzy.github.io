@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>MaterialAsset 材质资产</h1>
+
+<h2>概述</h2>
+<p>MaterialAsset（材质资产）用于存储材质的配置数据，包括顶点着色器、片段着色器、纹理、渲染状态等信息。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/asset/material-asset.h"</code></pre>
+
+<h2>API 接口</h2>
+
+<h3>构造函数</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td><code class="inline">MaterialAsset()</code></td><td>创建空材质资产</td></tr>
+        <tr><td><code class="inline">MaterialAsset(builtin, uuid, path)</code></td><td>通过内置材质创建</td></tr>
+    </tbody>
+</table>
+
+<h3>材质创建</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>create(materialData)</td><td>通过 JSON 数据创建材质</td><td>materialData: JSON 格式的材质数据</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>着色器设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setVertexShader(vert)</td><td>设置顶点着色器</td><td>vert: ShaderAsset 指针或路径</td><td>void</td></tr>
+        <tr><td>setFragmentShader(frag)</td><td>设置片段着色器</td><td>frag: ShaderAsset 指针或路径</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>纹理设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setTexture(texture)</td><td>设置主纹理</td><td>texture: TextureAsset 指针</td><td>void</td></tr>
+        <tr><td>setTexture(key, texture)</td><td>设置指定键的纹理</td><td>key: 纹理键，texture: TextureAsset 指针</td><td>void</td></tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

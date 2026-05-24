@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>Component 组件系统设计文档</h1>
+
+<p>Component（组件）是 Boo 引擎中用于扩展节点功能的可插拔模块。组件必须挂载到节点（Node）上才能工作。</p>
+
+<h2>组件类型</h2>
+<ul>
+    <li><strong>Layer2D 组件</strong>：用于 Node2D 节点（如 UISprite、UIText）</li>
+    <li><strong>Layer3D 组件</strong>：用于 Node3D 节点（如 MeshRenderer）</li>
+</ul>
+
+<h2>组件层级</h2>
+<table>
+    <thead><tr><th>值</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>Default</td><td>默认层级</td></tr>
+        <tr><td>Layer2D</td><td>2D 组件层</td></tr>
+        <tr><td>Layer3D</td><td>3D 组件层</td></tr>
+    </tbody>
+</table>
+
+<h2>API 接口</h2>
+
+<h3>基础信息</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>getUuid()</td><td>获取组件 UUID</td><td>const string</td></tr>
+        <tr><td>getName()</td><td>获取组件名称</td><td>string</td></tr>
+        <tr><td>getNode()</td><td>获取所属节点</td><td>Node*</td></tr>
+        <tr><td>getLayer()</td><td>获取组件层级</td><td>EComponentLayer</td></tr>
+    </tbody>
+</table>
+
+<h3>激活控制</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>isEnabled()</td><td>获取自身启用状态</td><td>-</td><td>bool</td></tr>
+        <tr><td>setEnabled(enabled)</td><td>设置启用状态</td><td>enabled: true/false</td><td>void</td></tr>
+        <tr><td>isEnabledInHierarchy()</td><td>获取层级启用状态</td><td>-</td><td>const bool</td></tr>
+    </tbody>
+</table>
+
+<h3>生命周期</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th></tr></thead>
+    <tbody>
+        <tr><td>OnAwake()</td><td>组件唤醒函数（纯虚函数）</td></tr>
+        <tr><td>OnEnable()</td><td>组件启用函数（纯虚函数）</td></tr>
+        <tr><td>Update(deltaTime)</td><td>组件更新函数（纯虚函数）</td></tr>
+        <tr><td>LateUpdate(deltaTime)</td><td>组件延迟更新函数（纯虚函数）</td></tr>
+        <tr><td>OnDisable()</td><td>组件禁用函数（纯虚函数）</td></tr>
+        <tr><td>OnDestroy()</td><td>组件销毁回调函数（纯虚函数）</td></tr>
+    </tbody>
+</table>
+
+<h2>自定义组件实现</h2>
+
+<h3>引擎内组件</h3>
+<pre><code>#pragma once
+#include &lt;string&gt;
+#include "core/component/component.h"
+#include "core/component/component-register.h"
+
+namespace Boo
+{
+    class MyComponent : public Component
+    {
+    public:
+        MyComponent(std::string name, Node *node, std::string uuid = "");
+
+        void OnAwake() override;
+        void OnEnable() override;
+        void Update(float deltaTime) override;
+        void LateUpdate(float deltaTime) override;
+        void OnDisable() override;
+        void OnDestroy() override;
+        void destroy() override;
+        void setProperty(json &data) override;
+
+        ~MyComponent() override;
+    };
+
+    REGISTER_COMPONENT(MyComponent, "My Custom Component")
+}</code></pre>
+
+<h3>引擎外组件（用户项目）</h3>
+<pre><code>#pragma once
+#include &lt;string&gt;
+#include "core/component/component.h"
+#include "core/component/component-register.h"
+
+class MyComponent : public Boo::Component
+{
+public:
+    MyComponent(std::string name, Boo::Node *node, std::string uuid = "");
+
+    void OnAwake() override;
+    void OnEnable() override;
+    void Update(float deltaTime) override;
+    void LateUpdate(float deltaTime) override;
+    void OnDisable() override;
+    void OnDestroy() override;
+    void destroy() override;
+    void setProperty(json &data) override;
+
+    ~MyComponent() override;
+};
+
+REGISTER_COMPONENT(MyComponent, "My Custom Component")</code></pre>
+</div>
+</body>
+</html>

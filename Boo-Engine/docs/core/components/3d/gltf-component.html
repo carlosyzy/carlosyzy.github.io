@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../../css/main.css">
+</head>
+<body>
+<div class="content-card">
+<h1>GLTFComponent GLTF 组件</h1>
+
+<h2>概述</h2>
+<p>GLTFComponent（GLTF 组件）用于加载和解析 GLTF 格式的 3D 模型文件。通过 GLTFComponent 组件，可以将 GLTF 文件解析为节点层级结构，自动创建子节点并挂载 MeshRenderer 组件。</p>
+
+<h3>组件层级</h3>
+<p>Layer3D 组件，只能添加到 Node3D 节点。</p>
+
+<h2>头文件</h2>
+<pre><code>#include "core/components/3d/gltf-component.h"</code></pre>
+
+<h2>API 接口</h2>
+
+<h3>GLTF 资源设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setGLTFAsset(gltfAssetPath)</td><td>通过路径设置 GLTF 资产</td><td>gltfAssetPath: GLTF 资产路径</td><td>void</td></tr>
+        <tr><td>setGLTFAsset(gltfAsset)</td><td>直接设置 GLTF 资产</td><td>gltfAsset: GLTFAsset 指针</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>材质设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setMaterial(meshNodePath, meshIndex, materialPath)</td><td>通过路径设置指定网格节点的材质</td><td>meshNodePath, meshIndex, materialPath</td><td>void</td></tr>
+        <tr><td>setMaterial(meshNodePath, meshIndex, material)</td><td>直接设置指定网格节点的材质</td><td>meshNodePath, meshIndex, material</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h3>纹理设置</h3>
+<table>
+    <thead><tr><th>接口</th><th>说明</th><th>参数</th><th>返回值</th></tr></thead>
+    <tbody>
+        <tr><td>setTexture(meshNodePath, texturePath)</td><td>设置指定网格节点的纹理</td><td>meshNodePath, texturePath</td><td>void</td></tr>
+        <tr><td>setTexture(meshNodePath, texture)</td><td>直接设置指定网格节点的纹理</td><td>meshNodePath, texture</td><td>void</td></tr>
+    </tbody>
+</table>
+
+<h2>使用示例</h2>
+
+<pre><code>// ── 创建 GLTF 节点 ─────────────────────────────────
+Boo::Node3D *root3D = m_scene->getRoot3D();
+auto *gltfNode = new Boo::Node3D("Model");
+gltfNode->setPosition(0.0f, 0.0f, 0.0f);
+root3D->addChild(gltfNode);
+
+// ── 添加 GLTFComponent 组件 ───────────────────────
+auto *gltfComponent = dynamic_cast&lt;Boo::GLTFComponent *&gt;(gltfNode->addComponent("GLTFComponent"));
+if (gltfComponent)
+{
+    gltfComponent->setGLTFAsset("models/robot.gltf");
+}</code></pre>
+</div>
+</body>
+</html>
