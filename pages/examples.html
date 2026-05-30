@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>示例中心 - Boo Engine</title>
+    <link rel="icon" type="image/svg+xml" href="../images/icons/cpp.svg">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/examples.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/icon.png" alt="Boo Engine" class="logo-icon">
+                <span class="logo-text">Boo Engine</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html" class="nav-link">首页</a>
+                <a href="docs.html" class="nav-link">文档</a>
+                <a href="history.html" class="nav-link">历史</a>
+                <a href="examples.html" class="nav-link active">示例</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="examples-section">
+            <div class="container">
+                <div class="page-header">
+                    <h2 class="page-title">示例<span class="highlight">中心</span></h2>
+                    <p class="page-subtitle">体验Boo Engine的强大功能，点击示例查看详情</p>
+                </div>
+
+                <div class="examples-grid" id="examplesGrid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="exampleModal">
+        <div class="modal modal-video">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <video id="modalVideo" controls autoplay></video>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">首页</a>
+                <a href="docs.html">文档</a>
+                <a href="history.html">历史</a>
+                <a href="examples.html">示例</a>
+            </div>
+            <p>&copy; 2024 Boo Engine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/data/examples.js"></script>
+    <script src="../js/examples.js"></script>
+</body>
+</html>

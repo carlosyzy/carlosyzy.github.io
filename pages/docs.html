@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档 - Boo Engine</title>
+    <link rel="icon" type="image/svg+xml" href="../images/icons/cpp.svg">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/icon.png" alt="Boo Engine" class="logo-icon">
+                <span class="logo-text">Boo Engine</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html" class="nav-link">首页</a>
+                <a href="docs.html" class="nav-link active">文档</a>
+                <a href="history.html" class="nav-link">历史</a>
+                <a href="examples.html" class="nav-link">示例</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content docs-layout">
+        <aside class="docs-sidebar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索文档..." class="search-input">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+
+            <nav class="docs-nav" id="docsNav">
+                <div class="nav-group">
+                    <div class="nav-level-1">入门指南</div>
+                    <a class="nav-level-2 nav-content" data-id="home">首页</a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-level-1">场景系统</div>
+                    <a class="nav-level-2 nav-content" data-id="core/scene/scene">Scene 场景</a>
+                    <a class="nav-level-2 nav-content" data-id="core/scene/node-2d">Node2D 2D节点</a>
+                    <a class="nav-level-2 nav-content" data-id="core/scene/node-3d">Node3D 3D节点</a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-level-1">组件系统</div>
+                    <a class="nav-level-2 nav-content" data-id="core/component/component">Component 组件基类</a>
+                    <a class="nav-level-2 nav-content" data-id="core/renderer/camera">Camera 相机组件</a>
+
+                    <div class="nav-level-2 nav-expandable" data-expand="render">
+                        渲染组件
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="expandable-content" data-expand="render">
+                        <div class="nav-level-3">UI</div>
+                        <a class="nav-level-4 nav-content" data-id="core/renderer/ui/ui-sprite">UISprite UI精灵</a>
+                        <a class="nav-level-4 nav-content" data-id="core/renderer/ui/ui-mask">UIMask UI遮罩</a>
+                        <a class="nav-level-4 nav-content" data-id="core/renderer/ui/ui-bmfont-text">UIBMFontText BMFont文本</a>
+                        <div class="nav-level-3">3D</div>
+                        <a class="nav-level-4 nav-content" data-id="core/renderer/3d/mesh-renderer">MeshRenderer 网格渲染</a>
+                    </div>
+
+                    <div class="nav-level-2 nav-expandable" data-expand="other">
+                        其他组件
+                        <span class="expand-icon">▶</span>
+                    </div>
+                    <div class="expandable-content" data-expand="other">
+                        <div class="nav-level-3">3D</div>
+                        <a class="nav-level-4 nav-content" data-id="core/components/3d/gltf-component">GLTFComponent GLTF组件</a>
+                        <div class="nav-level-3">Tool</div>
+                        <a class="nav-level-4 nav-content" data-id="core/components/tool/editor-camera">EditorCamera 编辑器相机</a>
+                        <a class="nav-level-4 nav-content" data-id="core/components/tool/ground-grid">GroundGrid 地面网格</a>
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-level-1">资源系统</div>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/asset-manager">AssetManager 资产管理器</a>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/mesh-asset">MeshAsset 网格资产</a>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/material-asset">MaterialAsset 材质资产</a>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/shader-asset">ShaderAsset 着色器资产</a>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/texture-asset">TextureAsset 纹理资产</a>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/gltf-asset">GLTFAsset GLTF资产</a>
+                    <a class="nav-level-2 nav-content" data-id="core/asset/audio-asset">AudioAsset 音频资产</a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-level-1">声音系统</div>
+                    <a class="nav-level-2 nav-content" data-id="core/audio/audio-manager">AudioManager 音频管理器</a>
+                    <a class="nav-level-2 nav-content" data-id="core/audio/audio">Audio 音频实例</a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-level-1">跨平台</div>
+                    <a class="nav-level-2 nav-content" data-id="platforms/windows">Windows 适配</a>
+                    <a class="nav-level-2 nav-content" data-id="platforms/macos">macOS 适配</a>
+                    <a class="nav-level-2 nav-content" data-id="platforms/android">Android 适配</a>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="docs-content" id="docsContent">
+            <div class="content-placeholder">
+                <div class="placeholder-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <h2>选择左侧文档开始阅读</h2>
+                <p>点击导航菜单中的任意文档标题来查看详细内容</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">首页</a>
+                <a href="docs.html">文档</a>
+                <a href="history.html">历史</a>
+                <a href="examples.html">示例</a>
+            </div>
+            <p>&copy; 2024 Boo Engine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/docs.js"></script>
+</body>
+</html>
