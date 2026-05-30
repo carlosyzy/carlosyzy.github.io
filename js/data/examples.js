@@ -6,7 +6,7 @@ const EXAMPLES = [
     thumbnail: '../images/examples/example-bricked.jpg',
     video: '../images/examples/example-bricked.mp4',
     tags: ['基础', '2D', '音效'],
-    download: '#'
+    download: 'https://github.com/carlosyzy/Boo-Engine-Bricked'
   }
 ];
 

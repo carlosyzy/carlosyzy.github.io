@@ -11,8 +11,8 @@ const VERSIONS = [
       '4.新增AudioManager音频管理系统',
       '5.支持多平台开发(Windows, macOS, Android)'
     ],
-    download: '#',
-    github: '#'
+    download: 'https://github.com/carlosyzy/Boo-Engine/releases',
+    github: 'https://github.com/carlosyzy/Boo-Engine'
   }
 ];
 
